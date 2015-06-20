@@ -24,3 +24,9 @@ git remote add deploy root@b14s.schlosser.io:~/b14s.git
 git push deploy master
 ```
 
+## Team
+
+Anshul Gupta
+Matt Piccolella
+Emily Pries
+Dan Schlosser
