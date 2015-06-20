@@ -8,12 +8,25 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController {
+  
+  let defaultLat: CGFloat = 37.4431
+  let defaultLon: CGFloat = -122.1711
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    let queryString: NSString = placesURL(defaultLat, defaultLon)
+    
+    Alamofire.request(Method.GET, "http://b14s.schlosser.io/places", parameters: ["lat": defaultLat, "lon": defaultLon])
+      .responseJSON { (request, response, data, error) in
+        println(request)
+        let responseData = JSON(data!)
+        println(responseData)
+        println(responseData["data"]["lat"])
+    }
   }
 
   override func didReceiveMemoryWarning() {
