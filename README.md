@@ -3,6 +3,16 @@ The DevFest Battle of the Hacks Project
 
 ## Server Development
 
+#### First Time Setup
+
+```
+mv config/example.secrets.py config/secrets.py
+```
+
+Then paste in the API keys.
+
+##### Developing
+
 ```bash
 cd server
 virtualenv --no-site-packages .

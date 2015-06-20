@@ -1,5 +1,6 @@
 from flask import Flask, request
 from utils.json_response import json_success, json_error_message
+from integrations.google_maps import nearby_places
 from sys import argv
 app = Flask(__name__)
 
@@ -17,10 +18,7 @@ def places():
     lon = request.args.get('lon')
     if lat is None or lon is None:
         return json_error_message("Must provide lat and lon")
-    return json_success({
-        'lat': lat,
-        'lon': lon
-    })
+    return nearby_places(lat, lon)
 
 
 @app.route('/actions')

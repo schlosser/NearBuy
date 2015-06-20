@@ -30,3 +30,6 @@ DerivedData
 bin
 include
 lib
+
+# Secrets
+secrets.py
