@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		454FD14494FC999825104244 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226E8D9950E57D2602682347 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5CB112281B35FEA00094D766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB112271B35FEA00094D766 /* AppDelegate.swift */; };
 		5CB1122A1B35FEA00094D766 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB112291B35FEA00094D766 /* ViewController.swift */; };
 		5CB1122D1B35FEA00094D766 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CB1122B1B35FEA00094D766 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		226E8D9950E57D2602682347 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB112221B35FEA00094D766 /* BattleOfTheHacks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BattleOfTheHacks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB112261B35FEA00094D766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CB112271B35FEA00094D766 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +38,8 @@
 		5CB112371B35FEA00094D766 /* BattleOfTheHacksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BattleOfTheHacksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB1123C1B35FEA00094D766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CB1123D1B35FEA00094D766 /* BattleOfTheHacksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleOfTheHacksTests.swift; sourceTree = "<group>"; };
+		5D4A426C8B68146137110C1A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D344BB42D47477C38895464E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				454FD14494FC999825104244 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +61,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B6D74B4E9BB4073EA68D3C1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D344BB42D47477C38895464E /* Pods.debug.xcconfig */,
+				5D4A426C8B68146137110C1A /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5CB112191B35FEA00094D766 = {
 			isa = PBXGroup;
 			children = (
 				5CB112241B35FEA00094D766 /* BattleOfTheHacks */,
 				5CB1123A1B35FEA00094D766 /* BattleOfTheHacksTests */,
 				5CB112231B35FEA00094D766 /* Products */,
+				2B6D74B4E9BB4073EA68D3C1 /* Pods */,
+				8D68D55F6B370DE437EC9AA8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +128,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8D68D55F6B370DE437EC9AA8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				226E8D9950E57D2602682347 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +143,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5CB112411B35FEA00094D766 /* Build configuration list for PBXNativeTarget "BattleOfTheHacks" */;
 			buildPhases = (
+				A550622C59FD801A24533A74 /* Check Pods Manifest.lock */,
 				5CB1121E1B35FEA00094D766 /* Sources */,
 				5CB1121F1B35FEA00094D766 /* Frameworks */,
 				5CB112201B35FEA00094D766 /* Resources */,
+				6750F8F6CD1133C90C49EC6E /* Embed Pods Frameworks */,
+				7BACB49C09788C46CD6ED32E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -206,6 +233,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6750F8F6CD1133C90C49EC6E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7BACB49C09788C46CD6ED32E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A550622C59FD801A24533A74 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5CB1121E1B35FEA00094D766 /* Sources */ = {
@@ -340,6 +415,7 @@
 		};
 		5CB112421B35FEA00094D766 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D344BB42D47477C38895464E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BattleOfTheHacks/Info.plist;
@@ -350,6 +426,7 @@
 		};
 		5CB112431B35FEA00094D766 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D4A426C8B68146137110C1A /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BattleOfTheHacks/Info.plist;
@@ -411,6 +488,7 @@
 				5CB112431B35FEA00094D766 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5CB112441B35FEA00094D766 /* Build configuration list for PBXNativeTarget "BattleOfTheHacksTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +497,7 @@
 				5CB112461B35FEA00094D766 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
