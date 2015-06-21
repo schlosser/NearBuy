@@ -1,11 +1,12 @@
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask import (Flask, request, render_template, flash, redirect,
                    url_for)
 from flask.ext.mongoengine import MongoEngine
-from flask.ext.login import LoginManager
+from flask.ext.login import LoginManager, login_required, login_user, logout_user
 from integrations.google_maps import nearby_places
 from utils.json_response import json_success, json_error_message
 from config.secrets import SECRET_KEY
-from forms.auth import LoginForm
+from forms.auth import LoginForm, SignupForm
 from forms.deals import DealForm
 from bson.objectid import ObjectId
 from sys import argv
@@ -33,8 +34,7 @@ if debug:
 
 
 @app.route('/')
-def main():
-    flash('Hello!')
+def index():
     return render_template('index.html')
 
 
@@ -59,26 +59,55 @@ def deals():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # Here we use a class of some kind to represent and validate our
-    # client-side form data. For example, WTForms is a library that will
-    # handle this for us.
+    from models.user import User
     form = LoginForm()
     if form.validate_on_submit():
-        # TODO: Login and validate the user.
-        # login_user(user)
+        try:
+            user = User.objects.get(email=form.email.data)
+            if not check_password_hash(user.password_hash, form.password.data):
+                raise
+            login_user(user)
+            flash('Welcome, %s.' % user.first_name)
+        except:
+            form.errors['email'] = ['Bad email / password combination']
 
-        flash('Logged in successfully.')
+        return redirect(url_for('admin'))
 
-        next = request.args.get('next')
-        # if not next_is_valid(next):
-        #     return abort(400)
-
-        return redirect(next or url_for('admin'))
-    print "fail!", form.errors
     return render_template('login.html', form=form)
 
 
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    from models.user import User
+    # Here we use a class of some kind to represent and validate our
+    # client-side form data. For example, WTForms is a library that will
+    # handle this for us.
+    form = SignupForm()
+    if form.validate_on_submit():
+        user = User(first_name=form.first_name.data,
+                    last_name=form.last_name.data,
+                    email=form.email.data,
+                    restaurant_name=form.restaurant_name.data,
+                    password_hash=generate_password_hash(form.password.data))
+        user.save()
+        login_user(user)
+
+        flash('Welcome, %s.' % user.first_name)
+
+        return redirect(url_for('admin'))
+
+    return render_template('signup.html', form=form)
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
 @app.route('/admin', methods=['GET', 'POST'])
+@login_required
 def admin():
     from models.deal import Deal
     form = DealForm()
@@ -105,7 +134,7 @@ def _generate_random_offer_code():
 @login_manager.user_loader
 def load_user(userid):
     from models.user import User
-    return User.objecst.get(id=ObjectId(userid))
+    return User.objects.get(id=ObjectId(userid))
 
 
 if __name__ == '__main__':

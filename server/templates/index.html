@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block app %}
-<x-app>
+<x-app button-url="/login" button-text="Log In">
 	<style is="custom-style">
 		h1.header {
 		  font-family: 'Roboto', 'Noto', sans-serif;
@@ -9,28 +9,141 @@
 		  /* @apply(--paper-font-common-expensive-kerning); */
 		  text-rendering: optimizeLegibility;
 
-		  font-size: 48px;
+		  font-size: 56px;
 		  font-weight: 400;
 		  letter-spacing: -.026em;
-		  line-height: 56px;
+		  line-height: 60px;
 		}
 		app-section paper-button {
 		  background-color: #fafafa;
 		  color: var(--primary-text-color);
 		}
+
+		paper-material {
+			background-color: white;
+			padding: 16px;
+		}
+		.soon {
+			display: block;
+			margin-top: 2rem;
+			height: 60px;
+		}
+		.meal {
+			margin-right: 2rem;
+			margin-left: 2rem;
+			padding: 24px;
+		}
+		.triple-set {
+			top: 50%;
+			transform: translateY(-50%);
+			position: absolute;
+			width: 100%;
+		}
+		.triple-set:after {
+			content: " ";
+			display: block;
+			clear: both;
+		}
+		.icon-triple {
+			color: var(--primary-text-color);
+			width: 33%;
+			box-sizing: border-box;
+			padding: 8px;
+			display: inline-block;
+			float: left;
+		}
+		.icon-triple iron-icon {
+			height: 100px;
+			width: 100px;
+			margin: 16px auto;
+			display: block;
+			text-align: center;
+		}
+		h3 {
+			font-weight: 400;
+			margin-top: 0;
+		}
+
+	    paper-material h1 {
+	      font-weight: 400;
+	      line-height: 38px;
+	    }
+	    .short {
+	    	height: 20rem;
+	    	padding: 2rem;
+	    }
+	    .footer::shadow .content {
+	    	padding: 1rem;
+	    	color: var(--primary-text-color) !important;
+	    	height: 2rem;
+	    	position: relative
+	    }
+	    .footer::shadow .content p {
+	    	color: var(--primary-text-color) !important;
+	    	width: 100%;
+	    	margin: 0;
+	    	top: 50%;
+			transform: translateY(-50%);
+			position: absolute;
+	    }
+	    .footer::shadow .content p a {
+	    	color: var(--primary-text-color) !important;
+	    }
+	    .footer {
+	    	height: 2rem;
+	    	padding: 2rem;
+	    }
+
 	</style>
 	<app-section
 		src="/static/img/snapshot.jpg"
 		align="center">
-		<h1 class="header">Window Shopping is Cool Again</h1>
-		<paper-button raised>
+		<h1 class="header">Window Shopping is Back</h1>
+		<a href="/login"><paper-button raised>
 		  <iron-icon icon="lock-outline"></iron-icon>
 		  Login
-		</paper-button>
-		<paper-button raised>
+		</paper-button></a>
+		<a href="#learn-more"><paper-button raised>
 		  <iron-icon icon="arrow-forward"></iron-icon>
 		  Learn More
-		</paper-button>
+		</paper-button></a>
+		<iron-image class="soon" sizing="contain" src="{{ url_for('static', filename='img/coming-soon.png') }}"></iron-image>
+	</app-section>
+	<app-section id="learn-more" class="short">
+		<div class="triple-set">
+			<div class="icon-triple">
+				<paper-material elevation="1">
+					<iron-icon icon="loyalty"></iron-icon>
+					<h3>Get rewarded for discovering new places. We provide you with real-time deals sourced just for you from local business around you.</h3>
+				</paper-material>
+			</div>
+			<div class="icon-triple">
+				<paper-material elevation="1">
+					<iron-icon icon="image:center-focus-strong"></iron-icon>
+					<h3>Point your camera at any local business and find instantaneous interactive results. You'll get what you're looking for before you even know it.</h3>
+				</paper-material>
+			</div>
+			<div class="icon-triple">
+				<paper-material elevation="1">
+					<iron-icon icon="store"></iron-icon>
+					<h3>Sign your local business up on our platform and manage your deals better than ever before. More power to you, more customers through your door.</h3>
+				</paper-material>
+			</div>
+		</div>
+	</app-section>
+	<app-section
+		src="/static/img/meal.jpg"
+		align="right">
+			<paper-material class="meal" elevation="1">
+				<h1>Are you a local business owner?<br> Sign up today to get on our platform.</h1>
+				<a href="/login"><paper-button raised>
+				  <iron-icon icon="icons:assignment-turned-in"></iron-icon>
+				  Sign up today
+			</paper-button></a>
+		</paper-material>
+	</app-section>
+	<app-section class="footer" align="center">
+		<p>NearBuy is built by <a href="http://anshulkgupta.com">Anshul</a>, <a href="https://schlosser.io">Dan</a>, <a href="http://emilypries.com/">Emily</a>, and <a href="https://twitter.com/matthew_pic">Matt</a> with ♥ from NYC.</p>
 	</app-section>
 </x-app>
 {% endblock %}

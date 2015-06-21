@@ -1,4 +1,4 @@
-<dom-module id="login-pane">
+<dom-module id="form-pane">
 
   <style>
     :host {
@@ -28,8 +28,8 @@
   </style>
   <template>
     <paper-material>
-      <form is="iron-form" id="form" method="post" action="/login">
-        <h2>Login</h2>
+      <form is="iron-form" id="form" method="post" action="[[action]]">
+        <h2>[[title]]</h2>
         <content></content>
         <paper-button raised on-click="submitForm">Submit</paper-button>
       </form>
@@ -40,15 +40,10 @@
   (function() {
     'use strict';
     Polymer({
-      is: 'login-pane',
+      is: 'form-pane',
       properties: {
-        align: {
-          type: String
-        },
-
-        src: {
-          type: String
-        }
+        action: String,
+        title: String
       },
       submitForm: function() {
         this.$.form.submit();

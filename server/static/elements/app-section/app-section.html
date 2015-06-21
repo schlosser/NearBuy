@@ -27,16 +27,22 @@
     .align {
       height: 100%;
       position: relative;
-      color: white;
       z-index: 10;
+      color: white;
     }
-    .align.left {
-      width: 50%;
+    .align /deep/ paper-material {
+      color: var(--primary-text-color);
     }
-    .align.right {
-      margin-left: 50%;
+    .left .align {
+      width: 33%;
     }
-    .align.center {
+    .right .align {
+      margin-left: 66%;
+    }
+    .right .content, .left .content {
+      padding: 12rem 4rem;
+    }
+    .center .align {
       text-align: center;
     }
     .scrim {
@@ -52,7 +58,7 @@
 
   </style>
   <template>
-    <section>
+    <section class$="{{alignClass(align)}}">
       <template is="dom-if" if="{{src}}">
         <div class="scrim">
         </div>
@@ -60,7 +66,7 @@
         </iron-image>
       </template>
       <div class="content">
-        <div class$="{{alignClass(align)}}">
+        <div class="align">
           <content></content>
         </div>
       </div>

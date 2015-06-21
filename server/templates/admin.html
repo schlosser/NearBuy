@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block app %}
-<x-app>
+<x-app button-text="Log Out {{current_user.first_name}}" button-url="/logout">
 	<style type="text/css">
 		paper-material.deal {
 		  padding: 16px;
@@ -67,7 +67,7 @@
 			<div class="right">
 				<paper-textarea id="body" name="body" label="Body"></paper-textarea>
 			</div>
-			<paper-input class="text-input" disabled value="Le Monde" label="Restaurant"></paper-input>
+			<paper-input class="text-input" disabled value="{{ current_user.restaurant_name }}" label="Restaurant"></paper-input>
 			<paper-input-container class="text-input" {% if form.errors.offer_code %}invalid{% endif %}>
 	        	<label>Offer Code (Optional)</label>
 				{{ form.offer_code(is="iron-input", maxlength="50") }}

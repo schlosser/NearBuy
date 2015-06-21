@@ -20,7 +20,7 @@
 			<span class="flex"></span>
 
 			<!-- Toolbar icons -->
-			<a href="/login"><paper-button>Login</paper-button></a>
+			<a href$="[[buttonUrl]]"><paper-button>[[buttonText]]</paper-button></a>
 
 			<!-- Application name -->
 			<div class="middle paper-font-display2 app-name"><a href="/">NearBuy</a></div>
@@ -40,8 +40,16 @@
   (function() {
     'use strict';
     Polymer({
-      is: 'x-app'
+      is: 'x-app',
+      properties: {
+      	buttonText: {
+      		type: String
+      	},
 
+      	buttonUrl: {
+      		type: String
+      	}
+      }
     });
   })();
 </script>

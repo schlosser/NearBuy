@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block app %}
+<x-app button-url="/login" button-text="Log In">
+	<style>
+	.name:after {
+		content: " ";
+		display: block;
+		clear: both;
+	}
+	.name-piece {
+		width: 50%;
+		float: left;
+		display: inline-block;
+	}
+	.first {
+		padding-right: 8px;
+		box-sizing: border-box;
+	}
+	.last {
+		padding-left: 8px;
+		box-sizing: border-box;
+	}
+	</style>
+	<form-pane title="Sign Up" action="/signup">
+		{{ form.csrf_token }}
+
+		<div class="name">
+			<paper-input-container class="name-piece first" {% if form.errors.first_name %}invalid{% endif %}>
+	        	<label>First Name</label>
+				{{ form.first_name(is="iron-input") }}
+				{% if form.errors.first_name %}
+					<paper-input-error>{{ form.errors.first_name[0] }}</paper-input-error>
+				{% endif %}
+			</paper-input-container>
+
+			<paper-input-container class="name-piece last" {% if form.errors.last_name %}invalid{% endif %}>
+	        	<label>Last Name</label>
+				{{ form.last_name(is="iron-input") }}
+				{% if form.errors.last_name %}
+					<paper-input-error>{{ form.errors.last_name[0] }}</paper-input-error>
+				{% endif %}
+			</paper-input-container>
+		</div>
+
+		<paper-input-container {% if form.errors.email %}invalid{% endif %}>
+        	<label>Email Address</label>
+			{{ form.email(is="iron-input") }}
+			{% if form.errors.email %}
+				<paper-input-error>{{ form.errors.email[0] }}</paper-input-error>
+			{% endif %}
+		</paper-input-container>
+		<paper-input-container {% if form.errors.restaurant_name %}invalid{% endif %}>
+        	<label>Restaurant Name</label>
+			{{ form.restaurant_name(is="iron-input") }}
+			{% if form.errors.restaurant_name %}
+				<paper-input-error>{{ form.errors.restaurant_name[0] }}</paper-input-error>
+			{% endif %}
+		</paper-input-container>
+		<paper-input-container {% if form.errors.password %}invalid{% endif %}>
+        	<label>Password</label>
+			{{ form.password(is="iron-input", type="password") }}
+			{% if form.errors.password %}
+				<paper-input-error>{{ form.errors.password[0] }}</paper-input-error>
+			{% endif %}
+		</paper-input-container>
+		<paper-input-container {% if form.errors.password_confirm %}invalid{% endif %}>
+        	<label>Password (again)</label>
+			{{ form.password_confirm(is="iron-input", type="password") }}
+			{% if form.errors.password_confirm %}
+				<paper-input-error>{{ form.errors.password_confirm[0] }}</paper-input-error>
+			{% endif %}
+		</paper-input-container>
+	</form-pane>
+</x-app>
+{% endblock %}

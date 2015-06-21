@@ -1,0 +1,63 @@
+<dom-module id="deal-form">
+
+  <style>
+    :host {
+      display: block;
+
+    }
+    paper-material {
+      padding: 16px;
+      background-color: white;
+      width: 40rem;
+      margin: 3rem auto 1rem;
+      position: relative;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    paper-material:after {
+      clear: both;
+      display: block;
+      content: " ";
+    }
+
+    .bottom {
+      display: block;
+      clear: both;
+      content: " ";
+    }
+  </style>
+  <template>
+    <paper-material>
+      <form is="iron-form" id="form" method="post" action="/admin">
+        <h2>New Deal</h2>
+        <content></content>
+        <div class="bottom">
+          <paper-button raised on-click="submitForm">Submit</paper-button>
+        </div>
+      </form>
+  </paper-material>
+  </template>
+</dom-module>
+<script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'deal-form',
+      properties: {
+        align: {
+          type: String
+        },
+
+        src: {
+          type: String
+        }
+      },
+      submitForm: function() {
+        this.$.form.submit();
+      }
+    });
+  })();
+</script>
