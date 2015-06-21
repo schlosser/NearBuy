@@ -16,6 +16,7 @@ Then paste in the API keys.
 ```bash
 cd server
 virtualenv --no-site-packages .
+source bin/activate
 pip install -r requirements.txt
 python app.py [debug]
 ```
