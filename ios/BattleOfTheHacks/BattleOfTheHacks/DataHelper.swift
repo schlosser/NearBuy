@@ -18,15 +18,15 @@ class DataHelper {
   var hasLoaded: Bool
   var error: Bool
   
-  init(location: CLLocation) {
+  init(location: CLLocation, completion: (() -> Void)? = nil) {
     self.lastLocationLoaded = location
     self.data = JSON([])
     self.hasLoaded = false
     self.error = false
-    loadData(location)
+    loadData(location, completion: completion)
   }
   
-  func loadData(location: CLLocation) {
+  func loadData(location: CLLocation, completion: (() -> Void)? = nil) {
     self.hasLoaded = false
     lastLocationLoaded = location
     let parameters: Dictionary<String,AnyObject> = ["lat": location.coordinate.latitude, "lon": location.coordinate.longitude]
@@ -37,6 +37,7 @@ class DataHelper {
         self.error = (responseData["status"].string == "error")
         self.data = responseData
         self.hasLoaded = true
+        completion?()
     }
   }
   
@@ -51,8 +52,11 @@ class DataHelper {
     }
   }
   
-  func numberOfItems() -> Int {
-    return self.data["data"].count
+  func numberOfItems(bearing: CLHeading) -> Int {
+    let place: JSON = placeForBearing(bearing)!
+    println("\(place)")
+    println(place["links"])
+    return 1
   }
   
   func placeForBearing(bearing: CLHeading) -> JSON? {
