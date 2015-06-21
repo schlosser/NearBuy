@@ -1,7 +1,7 @@
 from flask import Flask, request
 from utils.json_response import json_success, json_error_message
 from integrations.google_maps import nearby_places
-from sys import argv
+from sys import argv, stderr
 app = Flask(__name__)
 
 
@@ -14,10 +14,11 @@ def main():
 
 @app.route('/places')
 def places():
-    lat = request.args.get('lat')
-    lon = request.args.get('lon')
+    lat = float(request.args.get('lat'))
+    lon = float(request.args.get('lon'))
     if lat is None or lon is None:
         return json_error_message("Must provide lat and lon")
+    print >> stderr, "Finding nearby places"
     return nearby_places(lat, lon)
 
 
@@ -29,4 +30,4 @@ def actions():
 
 if __name__ == '__main__':
     debug = len(argv) == 2 and argv[1] == 'debug'
-    app.run(debug=debug)
+    app.run(port=5050, debug=debug)
