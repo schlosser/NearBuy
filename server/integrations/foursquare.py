@@ -1,6 +1,7 @@
 import requests
 import json
 from config.secrets import FOURSQUARE_CLIENT_ID, FOURSQUARE_CLIENT_SECRET
+foursquareVenueIdList = []
 
 def find_foursquare_url(lat, lon, name):
 	"""
@@ -35,6 +36,9 @@ def find_foursquare_url(lat, lon, name):
 			return
 
 		venueId = result[0]['id']
+
+		if venueId is not None:
+			foursquareVenueIdList.append(venueId)
 
 		# No results found
 		if len(result) == 0:
@@ -84,7 +88,8 @@ def find_foursquare_url(lat, lon, name):
 	        "url": venueResponse.get('url'),
 	        "specials": specials,
 	        "rating" : rating,
-	        "explore": alternatives
+	        "explore": alternatives,
+	        "venueId": venueId
 	    }
 	except:
 		return None
