@@ -1,12 +1,13 @@
 from utils.json_response import json_success, json_error_message
 from config.secrets import GOOGLE_API_KEY
 from integrations.open_table import find_open_table_url
-from math import sin, cos, atan2, pi, ceil
+from math import sin, cos, atan2, pi, ceil, acos
 import requests
 
 NUM_DEGREES = 360
 API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-RADIUS = 500  # meters
+SEARCH_RADIUS = 100  # meters
+EARTH_RADIUS = 6378100  # meters
 TYPES = '|'.join([
     'bakery',
     'bar',
@@ -23,7 +24,9 @@ def get_resource(lat, lon, place):
     return {
         'name': place['name'],
         'place_id': place['place_id'],
+        'opening_hours': place.get('opening_hours'),
         'bearing': get_bearing(lat, lon, place),
+        'distance': get_distance(lat, lon, place),
         'open_table_url': find_open_table_url(place)
     }
 
@@ -40,6 +43,21 @@ def get_bearing(my_lat, my_lon, place):
                      sin(my_lat) * cos(place_lat) * cos(delta_lon)))
     # return bearing as and integer number of degrees
     return (bearing / pi * 180) % 360
+
+
+def get_distance(my_lat, my_lon, place):
+    place_lat = place['geometry']['location']['lat']
+    place_lon = place['geometry']['location']['lng']
+
+    # Calculate the bearing using:
+    # http://www.ig.utexas.edu/outreach/googleearth/latlong.html
+    delta_lon = place_lon - my_lon
+    distance = acos(
+        sin(my_lat) * sin(place_lat) +
+        cos(my_lat) * cos(place_lat) * cos(delta_lon)
+    ) * EARTH_RADIUS
+    # return bearing as and integer number of degrees
+    return distance
 
 
 def generate_map(lat, lon, results):
@@ -60,6 +78,7 @@ def generate_map(lat, lon, results):
     map = [None] * NUM_DEGREES
     print "Generating map..."
 
+    # Populate the map with the place_id of the nearest place
     first_resource, first_bearing = rb_pairs[0]
     last_resource, last_bearing = rb_pairs[-1]
     first_midpoint = int((
@@ -98,21 +117,25 @@ def generate_map(lat, lon, results):
 
 
 def nearby_places(lat, lon):
-    params = {
-        'key': GOOGLE_API_KEY,
-        'location': '{lat},{lon}'.format(lat=lat, lon=lon),
-        'rankby': 'distance',
-        'types': TYPES
-    }
-    response = requests.get(API_URL, params=params)
+    from app import test_data
+    if test_data is not None:
+        results = test_data
+    else:
+        params = {
+            'key': GOOGLE_API_KEY,
+            'location': '{lat},{lon}'.format(lat=lat, lon=lon),
+            'radius': SEARCH_RADIUS,
+            'types': TYPES
+        }
+        response = requests.get(API_URL, params=params)
 
-    # Request failed
-    if not response.ok:
-        print "[PLACES] failed: ", response.json()
-        return json_error_message("Google Places API request failed",
-                                  error_data=response.json())
+        # Request failed
+        if not response.ok:
+            print "[PLACES] failed: ", response.json()
+            return json_error_message("Google Places API request failed",
+                                      error_data=response.json())
 
-    results = response.json()['results']
+        results = response.json()['results']
 
     # No results found
     if len(results) == 0:

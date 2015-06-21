@@ -1,0 +1,623 @@
+{
+   "html_attributions" : [],
+   "next_page_token" : "CoQC8gAAAEUBwiMvOXf6KjK5a9fZNVadogXYGcZM74TUI88mQDqs1ovzLzofRruXET88LeOFiEglBFKhAWuDpjd7IVysmxsBjqTmCN6DIqfdAJ2N6-jtfxSpans0jAnQ5099BM2L0vyz57xtCRn0deG6Frb3Nsn_TNUT_ZpZYlC49K-C8wrNIs7HQ1UiwQ-H1l5ETOBREEkRA81jDfLsZliSuZ9HuM3HkP9L8xw0BUrM8tw7VB0rM1gqJ1Pes2M8ySkyqJD9lW7MFe1gYiUN346HP36zCPCGc3NDO6cdHzPjdpuqJJeiZLYlhy4yXKaq1REfA6LM4NDzLsb-bWqeMS_TpHFkMgkSEBWFL5nzVvST6qUAnCy14HAaFJ3Lq9h6nBlXYPc8xOVCVmI_31Ja",
+   "results" : [
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.73846,
+               "lng" : -73.98850400000001
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "1f003ef829cecac6974e677cd495b3aa9d54594e",
+         "name" : "Gramercy Tavern",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 709,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAd51grrIwunaQAeH7t164HOmZ66Z8e30-0MHNK_bcj0bqCBSny3TrC3L-sEgJJa_36xPi8gQ06vSkRCsyKiBNE615r6qoWhJtEZgswZpenMgfR6pLF-Mrq97jzSHlqNxuBzMDo38d_iH4yfdCcstBFBIQ6bhbb6YYXz16ADXAFuDs-RoUBewYLbci14J-J24g8ufYTumlKdM",
+               "width" : 1024
+            }
+         ],
+         "place_id" : "ChIJvSQIgqFZwokRFYQbJdzceSs",
+         "price_level" : 4,
+         "rating" : 4.6,
+         "reference" : "CnRiAAAA8Kg4DSmw0NanVAZ4pEkpeQbYYkQ0nGg8DiR0dVMhQLz_r_2rh4QxoOG4GKOjyUmflIAX0dknpiIiPcJocnhrCyfQaE4bguCZKYRYXNNqmtjy8aFDrJTjXAs94w_3q9smeySRbJ4ZPJ5ssfKhRuuUTBIQ7YYR2-Y4_tpCFfOKZpqAmxoU2U0TR_pWUElx0tvW_miJrF21ymg",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "42 East 20th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.73686,
+               "lng" : -73.991384
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "2620576829e96e1423623c5e52fbe12e2b2c942a",
+         "name" : "Union Square Cafe",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1303,
+               "html_attributions" : [],
+               "photo_reference" : "CnRuAAAA5QgcT48dwVGs22Vrwql28DUtYSC3OROlwyIUXXz6O_25--JIiAAl9fq0_g5AgMr73R-iVHrv7idThmk6QSR6aqAynXy7hivXbt50EqibqphICiGQvn-ez6jYmOaw7Gop26oYUalQS_AxuiWf2TnHYBIQ4iuXE2VCrscVCGqhY29HXhoU3p4c2GCbSkpKxqewN331lhzo_wQ",
+               "width" : 1303
+            }
+         ],
+         "place_id" : "ChIJxTHke6JZwokRCLWVd99eDBw",
+         "price_level" : 3,
+         "rating" : 4.3,
+         "reference" : "CnRkAAAAGT99LbrbnMYy_CPZA9YUlezLXsKzUlgek0m2BP9vD2hchKZbD82mRBw1D8sCje40nJytZldYxWEwzoS1mOIhOFzEMtgYqerYa_8ZucfuO0QQMRdlXl4y3XzC6Mue7YhjsreGFF9P7gYCGRflBZzOLBIQTuz3dCtT2AX709W43ZWQWRoUlg-rcnONgP6_4kvgHzFTvfX3Ins",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "21 East 16th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.734507,
+               "lng" : -73.99331100000001
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "57d2eed3704c3f2e6668578944ba8a4cc6d09df5",
+         "name" : "Strip House",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 533,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAkH2EdP_jY-dJNVSY60yTeoovDYIDeIwtWUd7pVdY3yyPtJVybSvA980nwz-aeBkDutHN5rc9yMG1RRaXsm_CnjMvGidcvtACDkx8iR92l_YWbB-oTkGMHrcbto4FF1nXPpEIImsWm9khmYnWjs-qdRIQgHuN7ADctolBg7ImFwhBrhoUB2HqWFVu33cbpzaCl7OnPVVpCNE",
+               "width" : 800
+            }
+         ],
+         "place_id" : "ChIJZ_Isy5lZwokRVkRwOFISdfw",
+         "price_level" : 3,
+         "rating" : 4.4,
+         "reference" : "CmRfAAAA434ha6n2WVzz4JjkTizr6_ojSMK2a-2CCR5otsrfnHnahuJAvQX6-o1AFkHOc_mamApctptZ9-ax3qHtVoTLdNRl3celOKrvUxTUZc4yHxdZnVRYAVcQNquaXkWlDxt-EhBos94O_BmzXw5we_OASfkVGhSjIWNufAoi-Oh8URTBE4NJYcUwIg",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "13 East 12th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.734084,
+               "lng" : -73.993803
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "343b062c1a8af2bd222c4aedad863f3f91391b0a",
+         "name" : "Gotham Bar & Grill",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1215,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRqAAAA4GXR6QGGsBiZKwG2lejMIDHlVQwdnqs8lzo9Shs9ZkNaAemQO_U6BxmOivh2Po9xY8cLGb4KpcnZX5CuYbwqaN1IjelYJWhh3bBwScdpZTSYWvl3HAzZagYrdACHF5Rl-lNoBPkJFUOSW-y2xnlyhxIQjqAt3aOTjiPP19-Uvwa87BoUnWyrEQzwXKGNoo_XuiAL3sxEoGM",
+               "width" : 1836
+            }
+         ],
+         "place_id" : "ChIJZ72FzplZwokRmcA7CQzDMj0",
+         "price_level" : 4,
+         "rating" : 4.5,
+         "reference" : "CnRlAAAApWwSBd0DzGIYgRXf9WAOS0yGL0NNxgK5Vtdn2_haBzoBOhfkOkyCRvCTpzFbxF0gwiv4I-q0TxajjjjahQ7r0XMfX_oaljSNadprOg41GCyCD-W2YB4CCB7WpZi1VeJIHYlCcSUnVmT_gsIgKBozhxIQe3kGJhlyxdAesozcdfuuPBoUbBVrf9-qRSSXJHxP0N2zmgesvtg",
+         "scope" : "GOOGLE",
+         "types" : [ "store", "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "12 East 12th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.73761,
+               "lng" : -73.98916
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "f490d709efe612030ef4dcec4c384c61944f4464",
+         "name" : "Old Town Bar",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 3264,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRoAAAApzX_kq-TtExKoOLyTac9XvIQj2N2RchIbZKTWLeQvFgfMwyE9nq3TW1Y4fWjGV-TULm2cUnYtKFCC-kDktKrph6PBHZFg51bs8GjtEMnBofj-eh-SjAvBmE-c3zsWOV8nvNOiYfR7FS1qouxRuzcdBIQ3xBLyOBSwsy4v05BivCGcxoUSj2iRSm4ifb_d31Vt19e0RODPPo",
+               "width" : 2448
+            }
+         ],
+         "place_id" : "ChIJw-9BIqJZwokRJHawGH7Y_kc",
+         "price_level" : 2,
+         "rating" : 3.7,
+         "reference" : "CmRfAAAAiOAnjkftt35TWdFkLhA7pZ6ITYrFWNtuvUdR9-Va2YWZFzRPSRETQ7FYThnAKiuyWadx6VrdJpRJiaJzzAfcO2NBBm2-4N-nb8InmqLzMxlMTinIfPu2jKqhLZj0BsJqEhCxMBO7RM7NYbmQ00mydO8wGhQ4o1pYOvD1jcH4PgFKAEZrBJ-lcw",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "45 East 18th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.736722,
+               "lng" : -73.99022600000001
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "f1b16ab0f1503b16825c45fc8026d27c484d980f",
+         "name" : "Union Square Greenmarket",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1200,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAA9f7Aqi3cE77Pd4H51q4WRsdex47laudn0i5c9IKVhYwnslt0PwXWjD2nQNJGl1fqc4mgP6g06C8Pbd3VKYZXqxpLXpxZ1sCemT4x5uTBz8dGmng38sKmrPkO6f1FQKTRO8YX5elVPZiC3wkxZdWZexIQC2ESUy9EThLIWu5mo3MFHxoUpwoU38Fo966dMydG28urVb-kFdY",
+               "width" : 1600
+            }
+         ],
+         "place_id" : "ChIJ9wsQc59ZwokRou28v68fSR4",
+         "price_level" : 1,
+         "rating" : 4.5,
+         "reference" : "CnRrAAAAwMacMZGzbf9Clfdh8dnivt41iU6ijiojwV-C5d5Tsq6KeOZlm8o4GA3CV_DuANfhsTeLNUM658a0wshbfQ9e6EfGYoyu1-nHM5VDxqMm7GbEx38UGLnthq7g1juPpPnD3d7nEpCe0CV9h6juflsgKBIQRlN5X0xgdKv1T8Yq4it3sBoUw-Trr_U_i93gwD4ANaqFNyD8SOY",
+         "scope" : "GOOGLE",
+         "types" : [ "food", "establishment" ],
+         "vicinity" : "East 17th Street & Union Square W, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.73652,
+               "lng" : -73.995592
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+         "id" : "2d7b0c4ddc7b629d832b2831dfa2eb3fe867f05a",
+         "name" : "Party City W 14th St",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 115,
+               "html_attributions" : [],
+               "photo_reference" : "CnRmAAAAo9y2b9hTjvdhzuVJhbq7QmFelkEVY4AMOto07cM1n_Ba4_axlWVYz6V3vl497k6FYPNREbH3K9eSRHz_8KW8Hps5ak56o5RMkQK_TitHxkHSYyGg519TKLUJchlMNsi8LWqrofqF4U2CRGUcRF893xIQRzjRw8nl77raVfZaJ4g-mBoUtu7Or5vOLiABB_IS6VaGD-_OHzk",
+               "width" : 361
+            }
+         ],
+         "place_id" : "ChIJ9xOs5JdZwokR2ANJRWnBG94",
+         "price_level" : 1,
+         "rating" : 3,
+         "reference" : "CnRoAAAAImGyTvuWqjtPjLmFQUQWKoAt366qj6fO2WfKF_VlVbC6EycVBHy7w02f9vgjmxxRbHPDOL5IT5XIEbkS4MnkKMWNjaLux37q554PS84oKRV8XCIK18MCR64g1hjgW6zvWpTO4FB0aNuJt0vsLLIftxIQ6tF31CfQ-UA-A7K1AV769hoUJvF6EX-nqXKpsSiDyhszxws-1jA",
+         "scope" : "GOOGLE",
+         "types" : [ "food", "clothing_store", "store", "establishment" ],
+         "vicinity" : "38 West 14th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.738429,
+               "lng" : -73.98568899999999
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "44bbf91712b7ae22a71f18f854275f1b5dca2793",
+         "name" : "Maialino",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1366,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRqAAAAb2JF0E2GBI_6Ok-3HIQIMDP02ub1O1gREluUpVLcctUQhMQGZY2GkALAMf97eX48N7sQzVAWSuObVAowEDWw1B1HR-IsOGLOg6UqUgkE1w5DC7SjaHYxUvlfxYGRgwAyeBiStPxLzT4Pn_wx7PAjshIQV0Na_jIKfiru-rKEFcpqPhoUzMhv1EXPcZrZO9CbamI7OhxVLyg",
+               "width" : 2048
+            }
+         ],
+         "place_id" : "ChIJ2YfN_aBZwokR4i0_kCIix3o",
+         "price_level" : 3,
+         "rating" : 4.4,
+         "reference" : "CmRbAAAAGdRkJ5awY44dnL52eNetHxeBnNcY7bEhdxSJ6_YK3LTrAAr3GYu5Mhx5m3iCXX_l8WRzLeU1bN9Q4CW3vba62bVobKPPdxYwJPM5xxp3tAJ7-yxsLsNFRmFHgCbVZbQSEhBsSUpJWMzx4UHIKLjFMkSxGhR54eGlDPxWAmWemm2fVO-3DmSbBw",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "2 Lexington Avenue, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.731015,
+               "lng" : -73.98857599999999
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "840275122306056cb5a6b3de955e966b3cd5ebab",
+         "name" : "The Smith",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 667,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CpQBjQAAAMPRFYfiNfmYtbopfu4-yUVE--E89ro9TAwg3P8P0eubGD9x2BvP8OQheFLVFydqh1P3vXRgCDFtStgi5Qet2LkT36nZF6_ioFa6XoKDHQI3yl77AUoaZ2eBm1ZSJYKwpHdxqjQ31qC8cGLm4ggeenBi2Q3eYLgjKz_1Fa2ImVHzIuuEX5oSMdXFZwPAiehcwhIQJHriV1tw-5QdKWd-WUIv2BoUGULCpAF_8ZD8Hnl98NQsbByXqFY",
+               "width" : 1000
+            }
+         ],
+         "place_id" : "ChIJcXq9AZxZwokRZ56WZuGnZkg",
+         "price_level" : 2,
+         "rating" : 3.8,
+         "reference" : "CmRcAAAAzodTC7NA3Pqtfg9It5sIRnv5-h4Wa_64KA15UB7L-9B-P4BQxPpqZPD1S8wXDlTWutZQb1uRSUnVKVTAlA3xfC62U1SC8eE1mQRVKELymgiU6G69UnnB2aFbzRmh2TxjEhCbh0F1vF3zX3I8dwjISAOHGhS9OCu5To7hxHTQYXFoXJEtQFSFOQ",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "55 3rd Avenue, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.730901,
+               "lng" : -73.990179
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+         "id" : "c150e89d342dc6ba1cc7d78f3b5aaff06c7fe6a0",
+         "name" : "Ippudo",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 2844,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAxbSaQC6kGXvVkc1OKHKW3E-ALdXnI1ZVi5ODi3H-IFj1aBT77GJqqMI0mPJ_bjei3I-R_uJa1Wdi1YcogeIHyu2dExiieSw9bRhy0k6EWeG6v-gbWceUiLDhHnURT0dcAjMeGvm6FqGHbRedhFk4xxIQcU7RCC_BmPdpn8DNGwEIABoUw3T-8SbogyBma8EvLg308VZzBO4",
+               "width" : 1600
+            }
+         ],
+         "place_id" : "ChIJWUOc55tZwokR9q_g5l051rk",
+         "price_level" : 2,
+         "rating" : 4.4,
+         "reference" : "CmRaAAAAmCurF_0g8lXBJz2XVTDF2qUM35gcS90J6ArQtuIfygG2h0qXgCpS5JiGErq9zNWhb4Hu10fVY5Yfor2RxaM9-D6cJl16i2xfnf84UW9g4zM6_Cu0Bpnb3d1sjbDpG9sLEhDmveeEy0XXvIB3XGxsXvQmGhQ3KLykXLddGC2vw91p3l3_ugDgHg",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "food", "establishment" ],
+         "vicinity" : "65 4th Avenue, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.733494,
+               "lng" : -73.98828
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+         "id" : "57fb9e31781dce3ca75ce8564800fa0f0ec9e8a0",
+         "name" : "Trader Joe's",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1856,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CoQBdQAAAJvj0G-7a0Doc8TmssaIzOFyDBaVPfrtyyaH0l7fbbd_l28TqxeOGNalNu7Z7oVlOvDtJornO6KxnyDBoaWZHgLm8S-WhKURovHCnXFjQdX6HRHnbnl7Qhi0b71xyeIHPodDNXgU4KF2qRFF9BHPzqRmfFfoM_pOtP0LLOUNUPMuEhCFMJ1XYMNGGAwYz72SVfj_GhRpMirmW7cCPiWWGCJDjluoRlHBSQ",
+               "width" : 2528
+            }
+         ],
+         "place_id" : "ChIJa5oiKJ9ZwokR4EX7HlQSstY",
+         "price_level" : 2,
+         "rating" : 4.2,
+         "reference" : "CmRgAAAAVz9_sK9ooBlO7nlcbYzm3LJuzKbN-w3UO6qZC_eOhWjcfcrf9JM_Wg9KMPxMIna_s0q4qgnigh2Us-ro3ch5eG2r-5oaZmXNrYssIYkgRyVMZveWhBD1aciyQzrrkxRNEhDhxrbjO3UCZNyGXd0YQEY_GhTj2acEqp2GfcoRBaMUL5nD4DAs_A",
+         "scope" : "GOOGLE",
+         "types" : [
+            "grocery_or_supermarket",
+            "food",
+            "health",
+            "florist",
+            "store",
+            "establishment"
+         ],
+         "vicinity" : "142 East 14th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.732061,
+               "lng" : -73.99617499999999
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "d4c327b34c1dd49b67e69103485f85c1968c4de2",
+         "name" : "OTTO Enoteca e Pizzeria",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 270,
+               "html_attributions" : [],
+               "photo_reference" : "CnRmAAAAhsqDklxk5_v9Jv3r4Pb0uNAnc3iwnChMnfuY_k_bBFJvs5PU9UGbBMugLmjadbw6tKKgMHFB3o8mFLkKjCd74mn9NTnJASAUfGKdyACRwlBwfXYthrYkS5Kp7d0Df5yMQasnYPAAVD4Sssr7abz88BIQ259Pu1TdDWfdeEigOBCLthoU2epWXoLPAT5ciEiqGQbl4CPxBGo",
+               "width" : 270
+            }
+         ],
+         "place_id" : "ChIJcfHLy5BZwokRafTR9FHrpNw",
+         "price_level" : 2,
+         "rating" : 3.9,
+         "reference" : "CnRrAAAAcY8Ak1HQptbcCDNC8Bft5joBw6QQFo_kkX7B4foF2INSezvG7K-R4fhvZOtQXPhwtU04mJHk4IQVTh3N0hJFYfbGCBf2vSblV9M9DRpEac20Z_avWLbBjtkhsoKmSLU6gzumC_DLBiC1tCdZhnIXQBIQfQLayKTOrNpcuP3t7_aZARoUE1Tj3YUZCXeMS0NJDqzOU8RqV1U",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "1 5th Avenue, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.734416,
+               "lng" : -73.99113699999999
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "56bfa12c67c7ffaed333cc27072f0f5d065971ef",
+         "name" : "Max Brenner",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 962,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAROxsy1xLEFRztVYUXA7JNQPdLAIVZ9pT6FXxow-70PlaBdvu07q0ukjnhvEeT42V5w7fhUH50acQS-60fIuGtzC1YH6xPiYq2DbFaPb74_XmZXQZyV1RC0-KWo6ppoMDdsHMFNi01CQtYpzU7Ijj6BIQEsjmHeQoyHTWukW_HY5JEhoUWYrDqGrXInG9mDLCWezeA2Y6tDs",
+               "width" : 1283
+            }
+         ],
+         "place_id" : "ChIJy9yY5JhZwokRoHFfVHqopeg",
+         "price_level" : 2,
+         "rating" : 3.9,
+         "reference" : "CmRfAAAA1SF8q4bsIEJc3Q6Fys3ppWBvEQeRwq-PksivQx68BAAlXNYKGtorwUHa1PHmKmF7lzCV0rNeRCAPu8aYF40rlDFaF2TEOCUCC5_cwcI4vKskL1IJiHseMOMQIGTY3EPcEhDsxwTILZlrL2u1CrACMgewGhTmOr_dZXvdszSrAv_bkP_ja3ZrFA",
+         "scope" : "GOOGLE",
+         "types" : [ "store", "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "841 Broadway, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.734811,
+               "lng" : -73.991207
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+         "id" : "db577f1223860dde9891e795734f20b0329a92dd",
+         "name" : "Whole Foods Market",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1365,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRtAAAAfkjSvJhPup_AhFBOMDl03RuP0Tt3Z_TEwqpk1_jDVwNP4LqunS0tA2q643fQ0HbuA4xVycTu0Kijd8zqVsggOlqEPi_BTE98q8zstsCaQ2eeLiM8MyXCWxYSHcSIhWzh12dtFBPp5tkiaKmRjxiF0RIQBBli_nib3108qRVFk9IuYRoULn06qJtRKvtT0gmfl17Kef-yFxA",
+               "width" : 2048
+            }
+         ],
+         "place_id" : "ChIJlZFg95hZwokRzTo2UWdo0Lg",
+         "price_level" : 3,
+         "rating" : 3.8,
+         "reference" : "CnRmAAAAAnRArdx6wiDS7TCBg9_QTjj2U4lzkBpH9EEEcW6aZOLng5spzZXuofbejg_ozZ2gEH6rIeQ_YVN-VvPCauuq6CvbDEO90SdC9FO0Xine0me5E62lg4GpEm0__pvtPQTMA6Moxyh4Uae_DR-aH21JkRIQQrgz2rClhd7D2CVvYUAKiBoUlFHvM-OEQInwt_flsgbVbpz0uaU",
+         "scope" : "GOOGLE",
+         "types" : [
+            "grocery_or_supermarket",
+            "bakery",
+            "restaurant",
+            "health",
+            "florist",
+            "store",
+            "food",
+            "establishment"
+         ],
+         "vicinity" : "4 Union Square South, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.738292,
+               "lng" : -73.99079
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "70a5981a87ca5f724b1cf728a547f42f7231740e",
+         "name" : "Rosa Mexicano Union Square",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 576,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRqAAAA83uWKOblx8ko9cFf8N9u09VJImqyaMFxXQtz0t9sYf7MoX-mR7LEzlUFXhmlMUw4bQdXn5uR6ipb6790vdAC--QsCZmNHdRsgh9NMnaKpL6YMWFEbsMo4PXrEpnEhC6PARNa88FHKammUGBcfXuwpRIQPVoGJsVpTbTrM6ExNt8cehoUBj-MLE1dkjF65JpMODtNMePqfKg",
+               "width" : 514
+            }
+         ],
+         "place_id" : "ChIJb7W-WqJZwokRhJujP6urKAI",
+         "price_level" : 3,
+         "rating" : 3.9,
+         "reference" : "CnRtAAAABeGQdjKe5qHL9W2VoEgQWxJNMxKLz5SF3x4FUogDtzyV973d51O-bnLKzrn2gKuadfrF-NUk-Y0hhbQeFfnOmbxNxVAzTBLYzygJH2LFKfbXA-A-XGese0b2D-DJ9Rs2VJF5etjxRAwvCaml6DAFpxIQz_Rfl0kKPfQhbLquDvMGaBoUxv4btMKfG30mIugJmRNJ3KzaXGE",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "9 East 18th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.736844,
+               "lng" : -73.986892
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "e3a61f5487c02b58ea15c4cb1bb098650cbfd30f",
+         "name" : "Friend Of A Farmer",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 375,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAGZvByfh5AvPdrFUR11tpiiSPRjbsbQb-qtOEEA5zqPgxLEQ8iAJ3KGxaw7hV6rPWu25XOhr5fa3QgReeZHXet62OROZ0RIR9sMQ4YpembJ75aG7QAH_juNaM1Zc66AtYgyPO99O_QNGDJpCA5RJDNBIQRjG2YNiAW_TaB2xFDoBagRoUPYSZ8EkAH1K1eZ7_tF7pankOUWE",
+               "width" : 560
+            }
+         ],
+         "place_id" : "ChIJb85ryKFZwokRaCJqC07E0G0",
+         "price_level" : 2,
+         "rating" : 3.8,
+         "reference" : "CnRlAAAAaDa_ayKIRPznLm-QLsWz9PtHcIT2OkHva969iLZyVg0ONhBMho1PTerXzlz_zoYsPNlOdM4p1bXTY85Fv2k78okIbS9NFUYXoxLr7hoTbpEp4OudogB8E3okR9aJ0R0-jrfVlwdUFWXtZwxmN3cgjBIQ5W0dVdAUtxzrrCdC_DGr_BoU_6jEfrS5yiWkf3bmZe81SaknV1U",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "77 Irving Place # 1, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.737675,
+               "lng" : -73.991114
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "a6981b65592bdb28a294ad7892dc2a6355085d9e",
+         "name" : "Lillie's Victorian Establishment",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 2844,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAA33WuyP5IabDcT5l5_ojpwjTC27x0p-8DFi4rL3CTSmUIy3nU78cEfSnnGH3TYSsUGX8SiCA5lVRThz2RLWlyaPib6Opx-ubYWywsVQX-pbyj2W6pvz7aYj8T1-KYeqa2n7kOaURdUME6w5YwJyN1lRIQJbLCdJxr9HHPio3L2DgMEhoUBWoSGhe1wzpRkKKoph7zi7UCGkw",
+               "width" : 1600
+            }
+         ],
+         "place_id" : "ChIJHej6Z6JZwokRqvLB5IfS6Nc",
+         "price_level" : 4,
+         "rating" : 4.1,
+         "reference" : "CoQBdAAAAILiUPYhjk6zjiCTneVsEHHwwiJSlEwoIXT8WN6xO52cVtvojuZk2UMJVTpLKFydGbSuEnjKNL82ERAkmDcZkgHdPYjy674gFNgqMybV5qd3QcVHW88WVMkSpNz02AQN2oSLksq2c-57xJTfdCxYbYgOt4PnhWPhKBSGugsMq7TJEhAJmf7Nyta2vOcv1D1jSURSGhSK6OsnPRTJpXAD383J9-dkWYvZKQ",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "13 East 17th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.737605,
+               "lng" : -73.989643
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+         "id" : "3953351861ed5aa574ec343a7509c759b0f6e146",
+         "name" : "ABC Kitchen",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 321,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAYHICkVdyMOzUh2Dmfai_l3sXg5S47ocTBZrJyUASi098z6qd7x-E9oUQInk9USNyPqQvbPQbCjmRyJNYIJTcasqMb1KFCZqbfjkFLFDzbwTzEbq4c4S30kXgDM7tUB55N5TAZz6MPAp_rWD9IU60bhIQOFmm8tuHWNXIWluzpcLUkRoUJnJQYxNZVxkoCzvDreBh4n9YPus",
+               "width" : 600
+            }
+         ],
+         "place_id" : "ChIJSXmIIqJZwokRIhhDroV3qX8",
+         "price_level" : 3,
+         "rating" : 4.3,
+         "reference" : "CmReAAAAgXpL5DxjB2JuFgbdXN21wp3vtXyw8mbOQ-HN36FEw82NcemzatIO5HTf5ylrTAbUl5GNuxpLyHuEXPx5ERpAhJO7Ki83o9b4kTt2ddFxkLE0ImEIq7Zn8rqoLvkjPQfjEhAVUmxDw30q9T7M43wtcPWbGhTOeiO1bgYNYXXgAxX-3gVj7B3xhg",
+         "scope" : "GOOGLE",
+         "types" : [ "restaurant", "bar", "food", "establishment" ],
+         "vicinity" : "35 East 18th Street, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.738337,
+               "lng" : -73.988113
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "fc34eda8860d5b48a6f967cb45d12f03b7fdcace",
+         "name" : "Barbounia",
+         "opening_hours" : {
+            "open_now" : false,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 967,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRoAAAAnVSfHThi80iAAHYT0KRnHwQyLToKCPpNKNeozeadqVN9cYGbzIxD9NnAgK7nxrzUEiZbJ2l46PEshzJG-Yr6QEB5t5yTEFkDafiD7PDmvLNwemVBpdBwNRYXr529xVttANcn71w4EvfOfYOUeMnUaRIQ1T0G_lQxHdhcQXBxcvl8qhoU69HSkMB2ykPKNEc2ZYbV2GK6hEY",
+               "width" : 1206
+            }
+         ],
+         "place_id" : "ChIJafcWm6FZwokRAD6WiHiQdpE",
+         "price_level" : 3,
+         "rating" : 3.8,
+         "reference" : "CmRdAAAAcZ4rZ4Wk5OHWHIEp_jQxIIMY7eMHlYF36_fDOarAtLAhqDDt8X2gMWlaWfpK5jiiR6jTVAItNu4xwI94P3jsHPqcqC39hgmMoWjaF6FX71kdeOgSYI8IspCDeKv9NZkhEhBjn7h5sgTUHHWlmtqL0cSSGhQoqhaTK1F3ySIJ48GrfhFPlR6SkQ",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "250 Park Avenue South, New York"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 40.731341,
+               "lng" : -73.98896499999999
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/bar-71.png",
+         "id" : "6d074ce60a5a92bf6fa7a1a882f3f5d7837dc706",
+         "name" : "Village Pourhouse Downtown",
+         "opening_hours" : {
+            "open_now" : true,
+            "weekday_text" : []
+         },
+         "photos" : [
+            {
+               "height" : 1600,
+               "html_attributions" : [],
+               "photo_reference" : "CnRnAAAAR1eUBL2hxju1Eta8gmD_fsJGGidfmeowBgASvRd4HqVT876b7paoIKRkZvdzW3k_aGCeaM2vl4tQpoI5eIS8KmZVZms6-9ljLZlfcGGNh0RpACMsvlvV0WkixPCPPD4MbhQKMJ5EqIj1lnwAE143QBIQOG3iPw6-m-BVjHH6wbbDSxoUGjRo-6MEjCddBdYLkzSQSTlOtck",
+               "width" : 2844
+            }
+         ],
+         "place_id" : "ChIJlZLPqp5ZwokRuGU018jq_Qk",
+         "price_level" : 2,
+         "rating" : 3.2,
+         "reference" : "CnRtAAAAS6Fh16J5mCXoTqRH5dt6kwcJuvXjNapWXkazw8b4rlPgQDgUBg05617PlqVEWYxNNg6VQp0BbjJWOcPN9h4NfD6iD_D6Au4gO3q31TLf-wDsLZugY8FffhcFt0pLNDWPxqXVUEt_lEkresU06jClghIQlFTddxaXBFa4zcwqPjNWihoUb5FNNjAeLOmhKRNr22q5l51SRys",
+         "scope" : "GOOGLE",
+         "types" : [ "bar", "restaurant", "food", "establishment" ],
+         "vicinity" : "64 3rd Avenue, New York"
+      }
+   ],
+   "status" : "OK"
+}
