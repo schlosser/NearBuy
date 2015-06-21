@@ -2,6 +2,7 @@ from utils.json_response import json_success, json_error_message
 from config.secrets import GOOGLE_API_KEY
 from integrations.open_table import find_open_table_url
 from math import sin, cos, atan2, pi, ceil, acos
+from integrations.foursquare import find_foursquare_url
 import requests
 
 NUM_DEGREES = 360
@@ -15,9 +16,13 @@ TYPES = '|'.join([
     'food',
     'grocery_or_supermarket',
     'meal_delivery',
+    'restaurant'
     'meal_takeaway',
-    'movie_theater'
+    'movie_theater',
+    'point_of_interest',
+    'subway_station'
 ])
+
 
 
 def get_resource(lat, lon, place):
@@ -27,7 +32,8 @@ def get_resource(lat, lon, place):
         'opening_hours': place.get('opening_hours'),
         'bearing': get_bearing(lat, lon, place),
         'distance': get_distance(lat, lon, place),
-        'open_table_url': find_open_table_url(place)
+        'open_table_url': find_open_table_url(place),
+        'foursquare_url': find_foursquare_url(lat, lon, place['name'])
     }
 
 
@@ -68,7 +74,7 @@ def generate_map(lat, lon, results):
     # Pairs of (resource, int(round(bearing)))
     rb_pairs = [(resource,
                  int(round(resource['bearing']))) for resource in resources]
-    print "Got links and angles..."
+    # print "Got links and angles..."
 
     # Sort the pairs by bearing
     rb_pairs.sort(key=lambda lna: lna[1])
@@ -76,7 +82,7 @@ def generate_map(lat, lon, results):
 
     # Empty map
     map = [None] * NUM_DEGREES
-    print "Generating map..."
+    # print "Generating map..."
 
     # Populate the map with the place_id of the nearest place
     first_resource, first_bearing = rb_pairs[0]
@@ -85,7 +91,7 @@ def generate_map(lat, lon, results):
         last_bearing +
         ceil((NUM_DEGREES - last_bearing + first_bearing) / 2)
     ) % NUM_DEGREES)
-    print first_bearing, last_bearing, first_midpoint
+    # print first_bearing, last_bearing, first_midpoint
     if first_midpoint < first_bearing:
         for a in range(first_midpoint) + range(last_bearing, NUM_DEGREES):
             map[a] = last_resource['place_id']
@@ -142,5 +148,5 @@ def nearby_places(lat, lon):
         print "[PLACES] no results found,"
         return json_error_message("No places found near this location.")
 
-    print "Found {} Places at {},{}".format(len(results), lat, lon)
+    # print "Found {} Places at {},{}".format(len(results), lat, lon)
     return json_success(generate_map(lat, lon, results))

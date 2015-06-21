@@ -26,7 +26,7 @@ DerivedData
 #Pods/
 
 # Python
-.pyc
+*.pyc
 bin
 include
 lib
