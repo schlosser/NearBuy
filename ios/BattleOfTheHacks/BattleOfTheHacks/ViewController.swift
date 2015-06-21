@@ -27,6 +27,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   var previewLayer : AVCaptureVideoPreviewLayer?
   var captureDevice : AVCaptureDevice?
   var dataHelper: DataHelper?
+  var dealsDataHelper: DealsDataHelper?
   var pictureTimer: NSTimer!
   var stillImageOutput: AVCaptureStillImageOutput = AVCaptureStillImageOutput()
   var placeName: UIButton?
@@ -84,7 +85,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     dealsButton = UIButton(frame: CGRectMake(Views.Margin / 2.0, Views.Margin, screenWidth - Views.Margin, Views.ButtonHeight))
     dealsButton!.layer.cornerRadius = 0.0
     dealsButton!.backgroundColor = Views.ButtonColor
-    dealsButton!.setTitle("Deals in your area", forState: .Normal)
+    dealsButton!.setTitle("Loading Deals in Your Area", forState: .Normal)
     dealsButton!.setTitleColor(UIColor.blackColor(), forState: .Normal)
     dealsButton!.titleLabel!.font = Views.ButtonFont
     dealsButton!.addTarget(self, action: Selector("loadDeals"), forControlEvents: UIControlEvents.TouchUpInside)
@@ -212,19 +213,27 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   
   // MARK: CLLocationManagerDelegate
   func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
+    let mockLocation = CLLocation(latitude: 40.80591, longitude: -73.965559)
     if dataHelper == nil {
       self.view.addSubview(overlay)
       let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
       activityIndicator.center = self.view.center
       activityIndicator.startAnimating()
       self.view.addSubview(activityIndicator)
-      let mockLocation = CLLocation(latitude: 40.80591, longitude: -73.965559)
       dataHelper = DataHelper(location: mockLocation) {
         self.overlay.removeFromSuperview()
         activityIndicator.removeFromSuperview()
       }
     } else {
       dataHelper?.updateData(newLocation)
+    }
+    if dealsDataHelper == nil {
+      dealsDataHelper = DealsDataHelper(location: mockLocation) { () -> Void in
+        let number: Int = self.dealsDataHelper != nil ? self.dealsDataHelper!.numberOfItems() : 0
+        self.dealsButton?.setTitle("\(number) Deals in Your Area", forState: .Normal)
+      }
+    } else {
+      dealsDataHelper?.updateData(newLocation)
     }
   }
   
@@ -233,15 +242,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   }
   
   func handleCurrentBearing(bearing: CLHeading) {
-    if let currentPlace: JSON = dataHelper!.placeForBearing(bearing) {
-      let difference = abs(currentPlace["bearing"].doubleValue - bearing.magneticHeading)
-      println("Difference: \(difference)")
-      if difference < General.DegreeMargin {
-        let placeName: String = currentPlace["name"].string!
-        self.placeName?.setTitle(placeName, forState: UIControlState.Normal)
-        self.placeName?.hidden = false
-      } else {
-        self.placeName?.hidden = true
+    if dataHelper != nil {
+      if let currentPlace: JSON = dataHelper!.placeForBearing(bearing) {
+        let difference = abs(currentPlace["bearing"].doubleValue - bearing.magneticHeading)
+        println("Difference: \(difference)")
+        if difference < General.DegreeMargin {
+          let placeName: String = currentPlace["name"].string!
+          self.placeName?.setTitle(placeName, forState: UIControlState.Normal)
+          self.placeName?.hidden = false
+        } else {
+          self.placeName?.hidden = true
+        }
       }
     }
   }
@@ -253,7 +264,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if currentMode == TableMode.Deals {
-      return 4
+      return dealsDataHelper!.numberOfItems()
     } else if currentMode == TableMode.Options {
       return dataHelper!.numberOfItems()
     } else {
@@ -272,41 +283,46 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    if indexPath.row + 1 < dataHelper?.numberOfItems() {
-      let str: NSString = (dataHelper!.linkForIndex(indexPath) as NSString)
-      let link: NSString = str.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-      let url: NSURL = NSURL(string: link as String)!
-      // TODO: Check for deep links.'
-      if UIApplication.sharedApplication().canOpenURL(url) && url.scheme != "http" && url.scheme != "https" {
-        UIApplication.sharedApplication().openURL(url)
+    if currentMode == TableMode.Options {
+      if indexPath.row + 1 < dataHelper?.numberOfItems() {
+        let str: NSString = (dataHelper!.linkForIndex(indexPath) as NSString)
+        let link: NSString = str.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        let url: NSURL = NSURL(string: link as String)!
+        // TODO: Check for deep links.'
+        if UIApplication.sharedApplication().canOpenURL(url) && url.scheme != "http" && url.scheme != "https" {
+          UIApplication.sharedApplication().openURL(url)
+        } else {
+          let viewController: UIViewController = UIViewController()
+          let webView: UIWebView = UIWebView(frame: self.view.frame)
+          webView.delegate = self
+          viewController.view = webView
+          webView.loadRequest(NSURLRequest(URL: url))
+          self.navigationController?.navigationBarHidden = false
+          self.navigationController?.pushViewController(viewController, animated: true)
+        }
       } else {
-        let viewController: UIViewController = UIViewController()
-        let webView: UIWebView = UIWebView(frame: self.view.frame)
-        webView.delegate = self
-        viewController.view = webView
-        webView.loadRequest(NSURLRequest(URL: url))
-        self.navigationController?.navigationBarHidden = false
-        self.navigationController?.pushViewController(viewController, animated: true)
+        // Our reminder cell
+        var eventStore = EKEventStore()
+        
+        eventStore.requestAccessToEntityType(EKEntityTypeReminder,
+          completion: {(granted: Bool, error:NSError!) in
+            if !granted {
+              println("Access to store not granted")
+            } else {
+              let reminder = EKReminder(eventStore: eventStore)
+              reminder.title = "Go to the store and buy milk"
+              reminder.calendar = eventStore.defaultCalendarForNewReminders()
+              var error: NSError?
+              eventStore.saveReminder(reminder, commit: true, error: &error)
+              println("Error: \(error)")
+              // TODO: Present a confirmation
+            }
+        })
       }
     } else {
-      // Our reminder cell
-      var eventStore = EKEventStore()
-      
-      eventStore.requestAccessToEntityType(EKEntityTypeReminder,
-        completion: {(granted: Bool, error:NSError!) in
-          if !granted {
-            println("Access to store not granted")
-          } else {
-            let reminder = EKReminder(eventStore: eventStore)
-            reminder.title = "Go to the store and buy milk"
-            reminder.calendar = eventStore.defaultCalendarForNewReminders()
-            var error: NSError?
-            eventStore.saveReminder(reminder, commit: true, error: &error)
-            println("Error: \(error)")
-            // TODO: Present a confirmation
-          }
-      })
+      tableView.deselectRowAtIndexPath(indexPath, animated: true)
+      let alert = dealsDataHelper?.alertViewForDeal(indexPath)
+      self.presentViewController(alert!, animated: true, completion: nil)
     }
   }
   
@@ -314,7 +330,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     if currentMode == TableMode.Options {
       dataHelper?.formatCellAtIndex(cell, index: indexPath)
     } else if currentMode == TableMode.Deals {
-      cell.textLabel!.text = "HEY THERE"
+      dealsDataHelper?.formatCellAtIndex(cell, index: indexPath)
     }
   }
   
