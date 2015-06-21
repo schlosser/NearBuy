@@ -1,0 +1,47 @@
+<dom-module id="x-app">
+
+  <link rel="import" type="css" href="x-app.css">
+
+  <style>
+    :host {
+		display: block;
+		height: 100%;
+		box-sizing: border-box;
+    }
+    .middle {
+    	margin-left: 0 !important;
+    }
+  </style>
+  <template>
+  	<paper-header-panel>
+
+		<!-- Main Toolbar -->
+		<paper-toolbar id="mainToolbar">
+			<span class="flex"></span>
+
+			<!-- Toolbar icons -->
+			<a href="/login"><paper-button>Login</paper-button></a>
+
+			<!-- Application name -->
+			<div class="middle paper-font-display2 app-name"><a href="/">NearBuy</a></div>
+
+			<!-- Application sub title -->
+			<div class="bottom title"></div>
+
+		</paper-toolbar>
+				<!-- Main Content -->
+		<div class="content">
+			<content></content>
+		</div>
+	</paper-header-panel>
+  </template>
+</dom-module>
+<script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'x-app'
+
+    });
+  })();
+</script>

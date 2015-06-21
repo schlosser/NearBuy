@@ -1,0 +1,58 @@
+<dom-module id="login-pane">
+
+  <style>
+    :host {
+    display: block;
+    height: 100%;
+      position: relative;
+      /*background-color: var(--light-primary-color);*/
+    }
+    .middle {
+      margin-left: 0 !important;
+    }
+    paper-material {
+      padding: 16px;
+      background-color: white;
+      width: 20rem;
+      height: auto;
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    paper-button {
+      float: right;
+      margin-top: 2rem;
+    }
+  </style>
+  <template>
+    <paper-material>
+      <form is="iron-form" id="form" method="post" action="/login">
+        <h2>Login</h2>
+        <content></content>
+        <paper-button raised on-click="submitForm">Submit</paper-button>
+      </form>
+  </paper-material>
+  </template>
+</dom-module>
+<script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'login-pane',
+      properties: {
+        align: {
+          type: String
+        },
+
+        src: {
+          type: String
+        }
+      },
+      submitForm: function() {
+        this.$.form.submit();
+      }
+    });
+  })();
+</script>

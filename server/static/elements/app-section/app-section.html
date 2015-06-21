@@ -1,0 +1,91 @@
+
+<dom-module id="app-section">
+  <style>
+    :host {
+      display: block;
+      position: relative;
+      height: 40rem;
+    }
+    section {
+      height: 100%;
+    }
+    .content {
+      max-width: 100rem;
+      margin: 0 auto;
+      padding: 8rem 4rem;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    iron-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 8;
+    }
+    .align {
+      height: 100%;
+      position: relative;
+      color: white;
+      z-index: 10;
+    }
+    .align.left {
+      width: 50%;
+    }
+    .align.right {
+      margin-left: 50%;
+    }
+    .align.center {
+      text-align: center;
+    }
+    .scrim {
+      height: 100%;
+      background-color: rgba(0,0,0,0.2);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9;
+    }
+
+  </style>
+  <template>
+    <section>
+      <template is="dom-if" if="{{src}}">
+        <div class="scrim">
+        </div>
+        <iron-image src="[[src]]" sizing="cover">
+        </iron-image>
+      </template>
+      <div class="content">
+        <div class$="{{alignClass(align)}}">
+          <content></content>
+        </div>
+      </div>
+    </section>
+  </template>
+</dom-module>
+<script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'app-section',
+
+      properties: {
+        align: {
+          type: String
+        },
+
+        src: {
+          type: String
+        }
+      },
+
+      alignClass: function(align) {
+        return 'align ' + align;
+      }
+    });
+  })();
+</script>
