@@ -4,7 +4,7 @@ import json
 def find_open_table_url(restaurant):
 	"""
 	Given a restaurant from Google Places API response, returns mobile url for
-	OpenTable reservation if it exists, otherwise results False
+	OpenTable reservation if it exists, otherwise results None
 	"""
 	name = restaurant.get('name').replace('&', 'and').replace(' ', '+')
 	vicinity = restaurant.get('vicinity')
@@ -27,4 +27,4 @@ def find_open_table_url(restaurant):
 	if resto:
 		return resto.get('mobile_reserve_url')
 	else:
-		return False
+		return None

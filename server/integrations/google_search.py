@@ -24,4 +24,4 @@ def find_location_website(place):
 	if results:
 		return results.get('url')
 	else:
-		return False
+		return None
