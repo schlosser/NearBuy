@@ -1,12 +1,9 @@
 from utils.json_response import json_success, json_error_message
 from config.secrets import GOOGLE_API_KEY
-from integrations.open_table import find_open_table_url
 from math import sin, cos, atan2, pi, ceil, acos
-from integrations.foursquare import find_foursquare_url
 from integrations.links import find_active_links
 import requests
 
-WIKIPEDIA_BASE = 'https://wikipedia.org/wiki/Special:Search/'
 NUM_DEGREES = 360
 API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
 SEARCH_RADIUS = 1000  # meters
@@ -17,14 +14,11 @@ TYPES = '|'.join([
     'cafe',
     'food',
     'grocery_or_supermarket',
-    'meal_delivery',
     'restaurant'
-    'meal_takeaway',
     'movie_theater',
     'point_of_interest',
     'subway_station'
 ])
-
 
 def dsin(a):
     return sin(a * pi / 180)
@@ -36,12 +30,10 @@ def get_resource(lat, lon, place):
     return {
         'name': place['name'],
         'place_id': place['place_id'],
-        'opening_hours': place.get('opening_hours'),
         'bearing': get_bearing(lat, lon, place),
         'distance': get_distance(lat, lon, place),
         'links': find_active_links(place['geometry']['location']['lat'], place['geometry']['location']['lng'], place, place['name'])
     }
-
 
 def get_bearing(my_lat, my_lon, place):
     place_lat = place['geometry']['location']['lat']
@@ -84,7 +76,7 @@ def generate_map(lat, lon, results):
 
     # Sort the pairs by bearing
     rb_pairs.sort(key=lambda lna: lna[1])
-    print rb_pairs
+    # [optimaziation] print rb_pairs
 
     # Empty map
     map = [None] * NUM_DEGREES
