@@ -20,6 +20,8 @@ struct Views {
   static let ButtonFont: UIFont = UIFont(name: "HelveticaNeue", size: 20.0)!
   static let ButtonTextColor: UIColor = UIColor.blackColor()
   static let ArrowHeight: CGFloat = 50.0
+  static let CellHeight: CGFloat = 75.0
+  static let BackButtonDimen: CGFloat = 50.0
 }
 
 struct General {
@@ -27,4 +29,5 @@ struct General {
   static let DefaultLon: CGFloat = -122.1711
   static let DefaultTimeInterval: CGFloat = 1.0
   static let DegreeMargin: Double = 3.0
+  static let CellIdentifier: String = "CellIdentifier"
 }
