@@ -15,7 +15,7 @@ enum TableMode {
   case Options
 }
 
-class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UIWebViewDelegate {
 
   let screenWidth = UIScreen.mainScreen().bounds.size.width
   let screenHeight = UIScreen.mainScreen().bounds.size.height
@@ -40,17 +40,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    self.navigationController?.navigationBarHidden = true
     obtainDeviceAndBegin()
     configureCustomViews()
     configureLocationManager()
   }
   
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    self.navigationController?.navigationBarHidden = true
+  }
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     
     // Start Registering Pictures
-    pictureTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("capturePhoto"), userInfo: nil, repeats: true)
+    // pictureTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("capturePhoto"), userInfo: nil, repeats: true)
     
     setupTableView()
   }
@@ -82,7 +87,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     dealsButton!.setTitleColor(UIColor.blackColor(), forState: .Normal)
     dealsButton!.titleLabel!.font = Views.ButtonFont
     dealsButton!.addTarget(self, action: Selector("loadDeals"), forControlEvents: UIControlEvents.TouchUpInside)
-    self.view.addSubview(dealsButton!)
     
     // Configure Back Button
     backButton = UIButton(frame: CGRectMake((screenWidth / 2.0) - (Views.BackButtonDimen / 2.0), screenHeight - (Views.Margin / 2.0) - (Views.BackButtonDimen), Views.BackButtonDimen, Views.BackButtonDimen))
@@ -90,6 +94,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     backButton.setImage(UIImage(named: "XButton"), forState: UIControlState.Selected)
     backButton.addTarget(self, action: Selector("backButtonPressed"), forControlEvents: UIControlEvents.TouchUpInside)
     backButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+    
+    addButtons()
+  }
+  
+  func addButtons() {
+    self.view.addSubview(placeName!)
+    self.view.addSubview(dealsButton!)
   }
   
   func setupTableView() {
@@ -116,6 +127,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   
   func addModal() {
     self.view.addSubview(overlay)
+    tableView.hidden = false
     self.view.addSubview(tableView)
     self.view.bringSubviewToFront(tableView)
     self.view.addSubview(backButton)
@@ -123,9 +135,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   }
   
   func backButtonPressed() {
-    overlay.removeFromSuperview()
-    tableView.removeFromSuperview()
-    backButton.removeFromSuperview()
+    view.subviews.map({ $0.removeFromSuperview() })
+    addButtons()
   }
   
   func setupOverlay() {
@@ -257,11 +268,47 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     return cell
   }
   
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    let str: NSString = (dataHelper!.linkForIndex(indexPath) as NSString)
+    let link: NSString = str.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+    let url: NSURL = NSURL(string: link as String)!
+    // TODO: Check for deep links.'
+    if UIApplication.sharedApplication().canOpenURL(url) && url.scheme != "http" && url.scheme != "https" {
+      UIApplication.sharedApplication().openURL(url)
+    } else {
+      let viewController: UIViewController = UIViewController()
+      let webView: UIWebView = UIWebView(frame: self.view.frame)
+      webView.delegate = self
+      viewController.view = webView
+      webView.loadRequest(NSURLRequest(URL: url))
+      self.navigationController?.navigationBarHidden = false
+      self.navigationController?.pushViewController(viewController, animated: true)
+    }
+  }
+  
   func formatCell(cell: UITableViewCell, indexPath: NSIndexPath) {
     if currentMode == TableMode.Options {
       dataHelper?.formatCellAtIndex(cell, index: indexPath)
     } else if currentMode == TableMode.Deals {
       cell.textLabel!.text = "HEY THERE"
     }
+  }
+  
+  // MARK: UIWebViewDelegate
+  func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+    print("Webview fail with error \(error)");
+  }
+  
+  func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    return true
+  }
+  
+  func webViewDidStartLoad(webView: UIWebView) {
+    print("Webview started Loading")
+  }
+  
+  func webViewDidFinishLoad(webView: UIWebView) {
+    print("Webview did finish load")
   }
 }

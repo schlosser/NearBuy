@@ -60,13 +60,21 @@ class DataHelper {
   }
   
   func loadLinksForBearing(bearing: CLHeading) {
+    self.links = []
     self.currentPlace = keyForBearing(bearing)
     let place: JSON = placeForKey(self.currentPlace! as String)!
     println("Place: \(place)")
     for (index, object) in place["links"] {
       if index == "foursquare" {
-        let foursquareLink: String = place["links"][index]["foursquareUrl"].stringValue
-        links.append((index,foursquareLink))
+        let venueId: String = place["links"][index]["foursquareVenueId"].stringValue
+        let venueDeeplink = "foursquare://venues/" + venueId
+        println("Venue Deep Link: \(venueDeeplink)")
+        if UIApplication.sharedApplication().canOpenURL(NSURL(string: venueDeeplink)!) {
+          links.append((index,venueDeeplink))
+        } else {
+          let foursquareLink: String = place["links"][index]["foursquareUrl"].stringValue
+          links.append((index,foursquareLink))
+        }
       } else {
         let name = object.stringValue
         links.append((index,name))
@@ -82,6 +90,9 @@ class DataHelper {
     } else if link.0 == "foursquare" {
       cell.textLabel!.text = "Read Reviews on Foursquare"
       cell.imageView!.image = UIImage(named: "Foursquare")
+    } else if link.0 == "url" {
+      cell.textLabel!.text = "View Website"
+      cell.imageView!.image = UIImage(named: "Internet")
     } else {
       cell.textLabel!.text = "Something went wrong"
     }
@@ -97,5 +108,9 @@ class DataHelper {
   
   func placeForKey(key: String) -> JSON? {
     return hasLoaded && !error ? data["data"]["data"][key] : nil
+  }
+  
+  func linkForIndex(index: NSIndexPath) -> String {
+    return links[index.row].1
   }
 }
