@@ -42,7 +42,7 @@ def get_resource(lat, lon, place):
         #'open_table_url': find_open_table_url(place),
         #'foursquare_url': find_foursquare_url(lat, lon, place['name']),
         #'wikipedia_url': WIKIPEDIA_BASE + place['name'],
-        'links': find_active_links(lat, lon, place, place['name'])
+        'links': find_active_links(place['geometry']['location']['lat'], place['geometry']['location']['lng'], place, place['name'])
     }
 
 

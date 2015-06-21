@@ -9,16 +9,13 @@ def find_active_links(lat, lon, place, name):
 	response, returns mobile url for Foursquare
 	"""
 	WIKIPEDIA_BASE = 'https://wikipedia.org/wiki/Special:Search/'
+	links = {}
+	links["wikipediaUrl"] = WIKIPEDIA_BASE + name
+
 	try:
 		fsqReturn = find_foursquare_url(lat, lon, name)
 		foursquareVenueId = fsqReturn['venueId']
 		foursquareUrl = fsqReturn['4sqUrl']
-		openTableUrl = find_open_table_url(place)
-
-		links = {"wikipediaUrl" : WIKIPEDIA_BASE + name}
-
-		if openTableUrl is not None:
-			links['openTableUrl'] = openTableUrl
 
 		if foursquareUrl is not None:
 			links['foursquareUrl'] = foursquareUrl
@@ -26,8 +23,19 @@ def find_active_links(lat, lon, place, name):
 		if foursquareVenueId is not None:
 			links['foursquareVenueId'] = foursquareVenueId
 
-		return links
 	except:
-		return None
+		print "foursquare failed"
+
+	try:
+		openTableUrl = find_open_table_url(place)
+		if openTableUrl is not None:
+			links['openTableUrl'] = openTableUrl
+
+	except: 
+		print "opentable failed"
+
+	return links
+
+
 # Sample response object from Google Places API
 # name: "Shake Shack", lat: 40.77912606570555, lon: -73.95490489457822
