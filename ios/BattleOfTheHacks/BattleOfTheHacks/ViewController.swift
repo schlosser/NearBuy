@@ -9,6 +9,7 @@ import Alamofire
 import SwiftyJSON
 import AVFoundation
 import CoreLocation
+import EventKit
 
 enum TableMode {
   case Deals
@@ -128,6 +129,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   func addModal() {
     self.view.addSubview(overlay)
     tableView.hidden = false
+    tableView.reloadData()
     self.view.addSubview(tableView)
     self.view.bringSubviewToFront(tableView)
     self.view.addSubview(backButton)
@@ -216,7 +218,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
       activityIndicator.center = self.view.center
       activityIndicator.startAnimating()
       self.view.addSubview(activityIndicator)
-      dataHelper = DataHelper(location: newLocation) {
+      let mockLocation = CLLocation(latitude: 40.80591, longitude: -73.965559)
+      dataHelper = DataHelper(location: mockLocation) {
         self.overlay.removeFromSuperview()
         activityIndicator.removeFromSuperview()
       }
@@ -270,20 +273,40 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    let str: NSString = (dataHelper!.linkForIndex(indexPath) as NSString)
-    let link: NSString = str.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-    let url: NSURL = NSURL(string: link as String)!
-    // TODO: Check for deep links.'
-    if UIApplication.sharedApplication().canOpenURL(url) && url.scheme != "http" && url.scheme != "https" {
-      UIApplication.sharedApplication().openURL(url)
+    if indexPath.row + 1 < dataHelper?.numberOfItems() {
+      let str: NSString = (dataHelper!.linkForIndex(indexPath) as NSString)
+      let link: NSString = str.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+      let url: NSURL = NSURL(string: link as String)!
+      // TODO: Check for deep links.'
+      if UIApplication.sharedApplication().canOpenURL(url) && url.scheme != "http" && url.scheme != "https" {
+        UIApplication.sharedApplication().openURL(url)
+      } else {
+        let viewController: UIViewController = UIViewController()
+        let webView: UIWebView = UIWebView(frame: self.view.frame)
+        webView.delegate = self
+        viewController.view = webView
+        webView.loadRequest(NSURLRequest(URL: url))
+        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.pushViewController(viewController, animated: true)
+      }
     } else {
-      let viewController: UIViewController = UIViewController()
-      let webView: UIWebView = UIWebView(frame: self.view.frame)
-      webView.delegate = self
-      viewController.view = webView
-      webView.loadRequest(NSURLRequest(URL: url))
-      self.navigationController?.navigationBarHidden = false
-      self.navigationController?.pushViewController(viewController, animated: true)
+      // Our reminder cell
+      var eventStore = EKEventStore()
+      
+      eventStore.requestAccessToEntityType(EKEntityTypeReminder,
+        completion: {(granted: Bool, error:NSError!) in
+          if !granted {
+            println("Access to store not granted")
+          } else {
+            let reminder = EKReminder(eventStore: eventStore)
+            reminder.title = "Go to the store and buy milk"
+            reminder.calendar = eventStore.defaultCalendarForNewReminders()
+            var error: NSError?
+            eventStore.saveReminder(reminder, commit: true, error: &error)
+            println("Error: \(error)")
+            // TODO: Present a confirmation
+          }
+      })
     }
   }
   

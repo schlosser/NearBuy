@@ -49,14 +49,16 @@ class DataHelper {
   }
   
   func updateData(location: CLLocation) {
+    /*
     if shouldUpdate(location) {
       lastLocationLoaded = location
       loadData(location)
     }
+    */
   }
   
   func numberOfItems() -> Int {
-    return links.count
+    return links.count + 1
   }
   
   func loadLinksForBearing(bearing: CLHeading) {
@@ -75,6 +77,9 @@ class DataHelper {
           let foursquareLink: String = place["links"][index]["foursquareUrl"].stringValue
           links.append((index,foursquareLink))
         }
+      } else if index == "displayMetadata" {
+        let rating: String = place["links"][index]["rating"].stringValue
+        links.append((index,rating))
       } else {
         let name = object.stringValue
         links.append((index,name))
@@ -83,18 +88,28 @@ class DataHelper {
   }
   
   func formatCellAtIndex(cell: UITableViewCell, index: NSIndexPath) {
-    let link = self.links[(index.row)]
-    if link.0 == "wikipediaUrl" {
-      cell.textLabel!.text = "Research on Wikipedia"
-      cell.imageView!.image = UIImage(named: "Wikipedia")
-    } else if link.0 == "foursquare" {
-      cell.textLabel!.text = "Read Reviews on Foursquare"
-      cell.imageView!.image = UIImage(named: "Foursquare")
-    } else if link.0 == "url" {
-      cell.textLabel!.text = "View Website"
-      cell.imageView!.image = UIImage(named: "Internet")
+    if index.row < links.count {
+      let link = self.links[(index.row)]
+      if link.0 == "wikipediaUrl" {
+        cell.textLabel!.text = "Research on Wikipedia"
+        cell.imageView!.image = UIImage(named: "Wikipedia")
+      } else if link.0 == "foursquare" {
+        cell.textLabel!.text = "Read Reviews on Foursquare"
+        cell.imageView!.image = UIImage(named: "Foursquare")
+      } else if link.0 == "url" {
+        cell.textLabel!.text = "View Website"
+        cell.imageView!.image = UIImage(named: "Internet")
+      } else if link.0 == "openTableUrl" {
+        cell.textLabel!.text = "Make a Reservation on OpenTable"
+        cell.imageView!.image = UIImage(named: "OpenTable")
+      } else if link.0 == "displayMetadata" {
+        cell.textLabel!.text = "Rating: \(link.1)"
+        cell.imageView!.image = UIImage(named: "Rating")
+      }
     } else {
-      cell.textLabel!.text = "Something went wrong"
+      // This is our reminder!
+      cell.textLabel!.text = "Create a Reminder"
+      cell.imageView!.image = UIImage(named: "Reminders")
     }
   }
   
