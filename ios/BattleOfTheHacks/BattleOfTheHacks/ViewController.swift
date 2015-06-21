@@ -105,6 +105,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   
   func showPlaceDetails() {
     currentMode = TableMode.Options
+    dataHelper?.numberOfItems(self.locationManager.heading)
     addModal()
   }
   
@@ -199,7 +200,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   // MARK: CLLocationManagerDelegate
   func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
     if dataHelper == nil {
-      dataHelper = DataHelper(location: newLocation)
+      self.view.addSubview(overlay)
+      let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+      activityIndicator.center = self.view.center
+      activityIndicator.startAnimating()
+      self.view.addSubview(activityIndicator)
+      dataHelper = DataHelper(location: newLocation) {
+        self.overlay.removeFromSuperview()
+        activityIndicator.removeFromSuperview()
+      }
     } else {
       dataHelper?.updateData(newLocation)
     }
