@@ -6,7 +6,7 @@ import requests
 
 NUM_DEGREES = 360
 API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-SEARCH_RADIUS = 100  # meters
+SEARCH_RADIUS = 10000  # meters
 EARTH_RADIUS = 6378100  # meters
 TYPES = '|'.join([
     'bakery',
@@ -18,6 +18,14 @@ TYPES = '|'.join([
     'meal_takeaway',
     'movie_theater'
 ])
+
+
+def dsin(a):
+    return sin(a * pi / 180)
+
+
+def dcos(a):
+    return cos(a * pi / 180)
 
 
 def get_resource(lat, lon, place):
@@ -38,9 +46,9 @@ def get_bearing(my_lat, my_lon, place):
     # Calculate the bearing using:
     # http://www.ig.utexas.edu/outreach/googleearth/latlong.html
     delta_lon = place_lon - my_lon
-    bearing = atan2(sin(delta_lon) * cos(place_lat),
-                    (cos(my_lat) * sin(place_lat) -
-                     sin(my_lat) * cos(place_lat) * cos(delta_lon)))
+    bearing = atan2(dsin(delta_lon) * dcos(place_lat),
+                    (dcos(my_lat) * dsin(place_lat) -
+                     dsin(my_lat) * dcos(place_lat) * dcos(delta_lon)))
     # return bearing as and integer number of degrees
     return (bearing / pi * 180) % 360
 
@@ -53,8 +61,8 @@ def get_distance(my_lat, my_lon, place):
     # http://www.ig.utexas.edu/outreach/googleearth/latlong.html
     delta_lon = place_lon - my_lon
     distance = acos(
-        sin(my_lat) * sin(place_lat) +
-        cos(my_lat) * cos(place_lat) * cos(delta_lon)
+        dsin(my_lat) * dsin(place_lat) +
+        dcos(my_lat) * dcos(place_lat) * dcos(delta_lon)
     ) * EARTH_RADIUS
     # return bearing as and integer number of degrees
     return distance
