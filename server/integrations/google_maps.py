@@ -24,7 +24,7 @@ def get_resource(lat, lon, place):
         'name': place['name'],
         'place_id': place['place_id'],
         'bearing': get_bearing(lat, lon, place),
-        'open_table_url': find_open_table_url(place)
+        # 'open_table_url': find_open_table_url(place)
     }
 
 
