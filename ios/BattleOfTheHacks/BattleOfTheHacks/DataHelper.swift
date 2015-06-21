@@ -18,6 +18,7 @@ class DataHelper {
   var hasLoaded: Bool
   var error: Bool
   var links: Array<(String,String)>
+  var name: String?
   var currentPlace: NSString?
   
   init(location: CLLocation, completion: (() -> Void)? = nil) {
@@ -63,6 +64,7 @@ class DataHelper {
   
   func loadLinksForBearing(bearing: CLHeading) {
     self.links = []
+    self.name = ""
     self.currentPlace = keyForBearing(bearing)
     let place: JSON = placeForKey(self.currentPlace! as String)!
     println("Place: \(place)")
@@ -85,6 +87,7 @@ class DataHelper {
         links.append((index,name))
       }
     }
+    self.name = place["name"].stringValue
   }
   
   func formatCellAtIndex(cell: UITableViewCell, index: NSIndexPath) {
@@ -127,5 +130,9 @@ class DataHelper {
   
   func linkForIndex(index: NSIndexPath) -> String {
     return links[index.row].1
+  }
+  
+  func name(index: NSIndexPath) -> String {
+    return self.name!
   }
 }

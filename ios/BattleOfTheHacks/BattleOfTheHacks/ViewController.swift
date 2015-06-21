@@ -38,6 +38,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   var currentMode: TableMode?
   var overlay: UIView!
   var backButton: UIButton!
+  var isShowingModal: Bool = false
   
 
   override func viewDidLoad() {
@@ -128,6 +129,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   }
   
   func addModal() {
+    isShowingModal = true
+    self.placeName?.hidden = true
     self.view.addSubview(overlay)
     tableView.hidden = false
     tableView.reloadData()
@@ -138,6 +141,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   }
   
   func backButtonPressed() {
+    isShowingModal = false
     view.subviews.map({ $0.removeFromSuperview() })
     addButtons()
   }
@@ -249,7 +253,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
         if difference < General.DegreeMargin {
           let placeName: String = currentPlace["name"].string!
           self.placeName?.setTitle(placeName, forState: UIControlState.Normal)
-          self.placeName?.hidden = false
+          self.placeName?.hidden = isShowingModal
         } else {
           self.placeName?.hidden = true
         }
@@ -301,6 +305,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
           self.navigationController?.pushViewController(viewController, animated: true)
         }
       } else {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
         // Our reminder cell
         var eventStore = EKEventStore()
         
@@ -310,12 +315,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
               println("Access to store not granted")
             } else {
               let reminder = EKReminder(eventStore: eventStore)
-              reminder.title = "Go to the store and buy milk"
+              reminder.title = "Remember to check out " + self.dataHelper!.name!
               reminder.calendar = eventStore.defaultCalendarForNewReminders()
               var error: NSError?
               eventStore.saveReminder(reminder, commit: true, error: &error)
-              println("Error: \(error)")
-              // TODO: Present a confirmation
+              if error == nil {
+                let alert = UIAlertController(title: "Thanks", message: "Your reminder has been successfully posted", preferredStyle:UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+              }
             }
         })
       }
