@@ -16,7 +16,12 @@ def find_location_website(place):
 	search_url = 'https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q='+query
 
 	response = requests.get(search_url)
-	json_result = json.loads(response.text).get('responseData').get('results')[0]
-
-	return json_result.get('url')
-
+	json_result = json.loads(response.text)
+	responseData = json_result.get('responseData')
+	results = responseData.get('results')
+	if results:
+		results = results[0]
+	if results:
+		return results.get('url')
+	else:
+		return False
