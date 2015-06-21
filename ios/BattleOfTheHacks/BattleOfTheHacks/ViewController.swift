@@ -10,7 +10,12 @@ import SwiftyJSON
 import AVFoundation
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+enum TableMode {
+  case Deals
+  case Options
+}
+
+class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
 
   let screenWidth = UIScreen.mainScreen().bounds.size.width
   let screenHeight = UIScreen.mainScreen().bounds.size.height
@@ -27,6 +32,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
   var leftArrow: UIImageView?
   var rightArrow: UIImageView?
   var dealsButton: UIButton?
+  var tableView: UITableView!
+  var currentMode: TableMode?
+  var overlay: UIView!
+  var backButton: UIButton!
+  
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -41,6 +51,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
     
     // Start Registering Pictures
     pictureTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("capturePhoto"), userInfo: nil, repeats: true)
+    
+    setupTableView()
   }
 
   override func didReceiveMemoryWarning() {
@@ -50,6 +62,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
   func configureCustomViews() {
     setupButtons()
     setupArrows()
+    setupOverlay()
   }
   
   func setupButtons() {
@@ -70,23 +83,66 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
     dealsButton!.titleLabel!.font = Views.ButtonFont
     dealsButton!.addTarget(self, action: Selector("loadDeals"), forControlEvents: UIControlEvents.TouchUpInside)
     self.view.addSubview(dealsButton!)
+    
+    // Configure Back Button
+    backButton = UIButton(frame: CGRectMake((screenWidth / 2.0) - (Views.BackButtonDimen / 2.0), screenHeight - (Views.Margin / 2.0) - (Views.BackButtonDimen), Views.BackButtonDimen, Views.BackButtonDimen))
+    backButton.setImage(UIImage(named: "XButton"), forState: UIControlState.Normal)
+    backButton.setImage(UIImage(named: "XButton"), forState: UIControlState.Selected)
+    backButton.addTarget(self, action: Selector("backButtonPressed"), forControlEvents: UIControlEvents.TouchUpInside)
+    backButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+  }
+  
+  func setupTableView() {
+    let tableViewWidth = screenWidth - Views.Margin
+    let tableViewHeight = screenHeight - (Views.Margin * 4.0) - (Views.ButtonHeight * 2.0)
+    let rect: CGRect = CGRectMake(Views.Margin / 2.0, Views.Margin * 2.0 + Views.ButtonHeight, screenWidth - Views.Margin, tableViewHeight)
+    tableView = UITableView(frame: rect)
+    tableView!.delegate = self
+    tableView!.dataSource = self
+    tableView!.backgroundColor = UIColor.whiteColor()
+    tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: "CellIdentifier")
   }
   
   func showPlaceDetails() {
-    println("Show place!")
+    currentMode = TableMode.Options
+    addModal()
   }
   
   func loadDeals() {
-    println("Load deals!")
+    currentMode = TableMode.Deals
+    addModal()
+  }
+  
+  func addModal() {
+    self.view.addSubview(overlay)
+    self.view.addSubview(tableView)
+    self.view.bringSubviewToFront(tableView)
+    self.view.addSubview(backButton)
+    self.view.bringSubviewToFront(backButton)
+  }
+  
+  func backButtonPressed() {
+    overlay.removeFromSuperview()
+    tableView.removeFromSuperview()
+    backButton.removeFromSuperview()
+  }
+  
+  func setupOverlay() {
+    overlay = UIView(frame: self.view.frame)
+    overlay.backgroundColor = Views.ButtonColor
   }
   
   func setupArrows() {
     leftArrow = UIImageView(frame: CGRectMake(Views.Margin / 2.0, (screenHeight / 2.0) - (Views.ArrowHeight / 2.0), Views.ArrowHeight, Views.ArrowHeight))
     leftArrow?.image = UIImage(named: "LeftArrow")
+    leftArrow?.backgroundColor = Views.ButtonColor
+    leftArrow?.hidden = true
     view.addSubview(leftArrow!)
     
     rightArrow = UIImageView(frame: CGRectMake(screenWidth - (Views.Margin / 2.0) - Views.ArrowHeight, (screenHeight / 2.0) - (Views.ArrowHeight / 2.0), Views.ArrowHeight, Views.ArrowHeight))
     rightArrow?.image = UIImage(named: "RightArrow")
+    rightArrow?.backgroundColor = Views.ButtonColor
+    rightArrow?.hidden = true
     view.addSubview(rightArrow!)
   }
   
@@ -156,6 +212,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
   func handleCurrentBearing(bearing: CLHeading) {
     if let currentPlace: JSON = dataHelper!.placeForBearing(bearing) {
       let difference = abs(currentPlace["bearing"].doubleValue - bearing.magneticHeading)
+      println("Difference: \(difference)")
       if difference < General.DegreeMargin {
         let placeName: String = currentPlace["name"].string!
         self.placeName?.setTitle(placeName, forState: UIControlState.Normal)
@@ -166,18 +223,29 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
     }
   }
   
-  // MARK: UICollectionViewDelegate
-  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    // TODO: We need to select things.
+  // MARK: UITableViewDelegate, UITableViewDataSource
+  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    return 1
   }
   
-  // MARK: UICollectionViewDataSource
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = UICollectionViewCell()
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if currentMode == TableMode.Deals {
+      return 4
+    } else if currentMode == TableMode.Options {
+      return 4
+    } else {
+      return 0
+    }
+  }
+  
+  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    return 75.0
+  }
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier("CellIdentifier", forIndexPath: indexPath) as! UITableViewCell
+    cell.textLabel!.text = "Matt"
+    cell.imageView!.image = UIImage(named: "Foursquare")
     return cell
-  }
-  
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return self.dataHelper!.numberOfItems()
   }
 }

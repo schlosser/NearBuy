@@ -33,6 +33,7 @@ class DataHelper {
     Alamofire.request(Method.GET, "http://b14s.schlosser.io/places", parameters: parameters)
       .responseJSON { (request, response, data, error) in
         let responseData = JSON(data!)
+        println("Finished data load")
         self.error = (responseData["status"].string == "error")
         self.data = responseData
         self.hasLoaded = true
