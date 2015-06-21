@@ -22,11 +22,11 @@ def main():
 
 @app.route('/places')
 def places():
-    lat = float(request.args.get('lat'))
-    lon = float(request.args.get('lon'))
+    lat = request.args.get('lat')
+    lon = request.args.get('lon')
     if lat is None or lon is None:
         return json_error_message("Must provide lat and lon")
-    return nearby_places(lat, lon)
+    return nearby_places(float(lat), float(lon))
 
 
 if __name__ == '__main__':
