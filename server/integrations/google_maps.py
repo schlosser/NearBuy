@@ -48,7 +48,8 @@ def generate_map(lat, lon, results):
     resources = (get_resource(lat, lon, place) for place in results)
 
     # Pairs of (resource, int(round(bearing)))
-    rb_pairs = [(resource, int(round(resource['bearing']))) for resource in resources]
+    rb_pairs = [(resource,
+                 int(round(resource['bearing']))) for resource in resources]
     print "Got links and angles..."
 
     # Sort the pairs by bearing
