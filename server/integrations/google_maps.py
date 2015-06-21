@@ -4,6 +4,7 @@ from integrations.open_table import find_open_table_url
 from math import sin, cos, atan2, pi, ceil, acos
 import requests
 
+WIKIPEDIA_BASE = 'https://wikipedia.org/wiki/Special:Search/'
 NUM_DEGREES = 360
 API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
 SEARCH_RADIUS = 10000  # meters
@@ -35,7 +36,8 @@ def get_resource(lat, lon, place):
         'opening_hours': place.get('opening_hours'),
         'bearing': get_bearing(lat, lon, place),
         'distance': get_distance(lat, lon, place),
-        'open_table_url': find_open_table_url(place)
+        'open_table_url': find_open_table_url(place),
+        'wikipedia_url': WIKIPEDIA_BASE + place['name']
     }
 
 
