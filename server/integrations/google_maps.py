@@ -6,7 +6,7 @@ import requests
 
 NUM_DEGREES = 360
 API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-SEARCH_RADIUS = 1000  # meters
+SEARCH_RADIUS = 500  # meters
 EARTH_RADIUS = 6378100  # meters
 TYPES = '|'.join([
     'bakery',
@@ -32,7 +32,7 @@ def get_resource(lat, lon, place):
         'place_id': place['place_id'],
         'bearing': get_bearing(lat, lon, place),
         'distance': get_distance(lat, lon, place),
-        'links': find_active_links(place['geometry']['location']['lat'], place['geometry']['location']['lng'], place, place['name'])
+        'links': find_active_links(place['geometry']['location']['lat'], place['geometry']['location']['lng'], place, place['name']),
     }
 
 def get_bearing(my_lat, my_lon, place):

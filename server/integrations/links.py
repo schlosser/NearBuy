@@ -17,6 +17,7 @@ def find_active_links(lat, lon, place, name):
 		foursquareVenueId = fsqReturn['venueId']
 		foursquareUrl = fsqReturn['4sqUrl']
 		website = fsqReturn['url']
+		displayMetadata = fsqReturn['metadata']
 
 		if foursquareUrl is not None:
 			links['foursquare'] = {"foursquareUrl" : foursquareUrl,
@@ -24,6 +25,9 @@ def find_active_links(lat, lon, place, name):
 
 		if website is not None:
 			links['url'] = website
+
+		if displayMetadata is not None:
+			links['displayMetadata'] = displayMetadata
 
 	except:
 		print "foursquare failed"
