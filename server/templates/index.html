@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block app %}
+<x-app>
+	<style is="custom-style">
+		h1.header {
+		  font-family: 'Roboto', 'Noto', sans-serif;
+		  -webkit-font-smoothing: antialiased;
+		  /* @apply(--paper-font-common-expensive-kerning); */
+		  text-rendering: optimizeLegibility;
+
+		  font-size: 48px;
+		  font-weight: 400;
+		  letter-spacing: -.026em;
+		  line-height: 56px;
+		}
+		app-section paper-button {
+		  background-color: #fafafa;
+		  color: var(--primary-text-color);
+		}
+	</style>
+	<app-section
+		src="/static/img/snapshot.jpg"
+		align="center">
+		<h1 class="header">Window Shopping is Cool Again</h1>
+		<paper-button raised>
+		  <iron-icon icon="lock-outline"></iron-icon>
+		  Login
+		</paper-button>
+		<paper-button raised>
+		  <iron-icon icon="arrow-forward"></iron-icon>
+		  Learn More
+		</paper-button>
+	</app-section>
+</x-app>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block app %}
+<x-app noLogin>
+	<login-pane>
+		{{ form.csrf_token }}
+		<paper-input-container {% if form.errors.email %}invalid{% endif %}>
+        	<label>Email Address</label>
+			{{ form.email(is="iron-input") }}
+			{% if form.errors.email %}
+				<paper-input-error>{{ form.errors.email[0] }}</paper-input-error>
+			{% endif %}
+		</paper-input-container>
+		<paper-input-container {% if form.errors.password %}invalid{% endif %}>
+        	<label>Password</label>
+			{{ form.password(is="iron-input", type="password") }}
+			{% if form.errors.password %}
+				<paper-input-error>{{ form.errors.password[0] }}</paper-input-error>
+			{% endif %}
+		</paper-input-container>
+	</login-pane>
+</x-app>
+{% endblock %}

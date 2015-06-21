@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block app %}
+<x-app>
+	<style type="text/css">
+		paper-material.deal {
+		  padding: 16px;
+		  margin: 16px 0;
+		  background-color: white;
+		}
+
+		paper-material.deal:after {
+			content: " ";
+			display: block;
+			clear: both;
+		}
+
+		section {
+			margin: 0 8px;
+			max-width: 70rem;
+			margin: 0 auto;
+		}
+		h4 {
+			margin-top: 0;
+		}
+
+		.text-input {
+			width: 50%;
+			padding-right: 8px;
+			box-sizing: border-box;
+			display: inline-block;
+		}
+		.right {
+			float:right;
+			padding-left: 8px;
+			box-sizing: border-box;
+			width: 50%;
+			display: inline-block;
+		}
+
+		#body {
+			width: 100%;
+		}
+
+		h6 {
+			float: right;
+			margin: 0;
+		}
+		.column {
+			width: 50%;
+			float: left;
+			padding: 0 8px;
+			box-sizing: border-box;
+			display: inline-block;
+		}
+	</style>
+	<deal-form>
+			{{ form.csrf_token }}
+			<paper-input-container class="text-input" {% if form.errors.title %}invalid{% endif %}>
+	        	<label>Title</label>
+				{{ form.title(is="iron-input", maxlength="50") }}
+				{% if form.errors.title %}
+					<paper-input-error>{{ form.errors.title[0] }}</paper-input-error>
+				{% endif %}
+				<paper-input-char-counter></paper-input-char-counter>
+			</paper-input-container>
+			<div class="right">
+				<paper-textarea id="body" name="body" label="Body"></paper-textarea>
+			</div>
+			<paper-input class="text-input" disabled value="Le Monde" label="Restaurant"></paper-input>
+			<paper-input-container class="text-input" {% if form.errors.offer_code %}invalid{% endif %}>
+	        	<label>Offer Code (Optional)</label>
+				{{ form.offer_code(is="iron-input", maxlength="50") }}
+				{% if form.errors.offer_code %}
+					<paper-input-error>{{ form.errors.offer_code[0] }}</paper-input-error>
+				{% endif %}
+				<paper-input-char-counter></paper-input-char-counter>
+			</paper-input-container>
+	</deal-form>
+	<section>
+		<div class="column">
+			{% for deal in deals %}
+			{% if loop.index0 % 2 == 0 %}
+			<paper-material class="deal" elevation="1">
+				<h4>{{ deal.title }}</h4>
+				<p>{{ deal.body }}</p>
+				<h6>Offer Code: {{ deal.offer_code }}</h6>
+			</paper-material>
+			{% endif %}
+			{% endfor %}
+		</div>
+
+		<div class="column">
+			{% for deal in deals %}
+			{% if loop.index0 % 2 == 1 %}
+			<paper-material class="deal" elevation="1">
+				<h4>{{ deal.title }}</h4>
+				<p>{{ deal.body }}</p>
+				<h6>Offer Code: {{ deal.offer_code }}</h6>
+			</paper-material>
+			{% endif %}
+			{% endfor %}
+		</div>
+	</section>
+	<script>
+		window.addEventListener('WebComponentsReady', function() {
+			[].forEach.call(document.querySelectorAll('.deal'), function(elem) {
+			    elem.addEventListener('mouseenter', function(e) {
+			        elem.elevation++;
+			    });
+
+			    elem.addEventListener('mouseleave', function(e) {
+			        elem.elevation--;
+			    });
+			});
+
+		});
+	</script>
+</x-app>
+{% endblock %}
