@@ -5,9 +5,10 @@ from math import sin, cos, atan2, pi, ceil, acos
 from integrations.foursquare import find_foursquare_url
 import requests
 
+WIKIPEDIA_BASE = 'https://wikipedia.org/wiki/Special:Search/'
 NUM_DEGREES = 360
 API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-SEARCH_RADIUS = 100  # meters
+SEARCH_RADIUS = 10000  # meters
 EARTH_RADIUS = 6378100  # meters
 TYPES = '|'.join([
     'bakery',
@@ -24,6 +25,12 @@ TYPES = '|'.join([
 ])
 
 
+def dsin(a):
+    return sin(a * pi / 180)
+
+
+def dcos(a):
+    return cos(a * pi / 180)
 
 def get_resource(lat, lon, place):
     return {
@@ -33,7 +40,8 @@ def get_resource(lat, lon, place):
         'bearing': get_bearing(lat, lon, place),
         'distance': get_distance(lat, lon, place),
         'open_table_url': find_open_table_url(place),
-        'foursquare_url': find_foursquare_url(lat, lon, place['name'])
+        'foursquare_url': find_foursquare_url(lat, lon, place['name']),
+        'wikipedia_url': WIKIPEDIA_BASE + place['name']
     }
 
 
@@ -44,9 +52,9 @@ def get_bearing(my_lat, my_lon, place):
     # Calculate the bearing using:
     # http://www.ig.utexas.edu/outreach/googleearth/latlong.html
     delta_lon = place_lon - my_lon
-    bearing = atan2(sin(delta_lon) * cos(place_lat),
-                    (cos(my_lat) * sin(place_lat) -
-                     sin(my_lat) * cos(place_lat) * cos(delta_lon)))
+    bearing = atan2(dsin(delta_lon) * dcos(place_lat),
+                    (dcos(my_lat) * dsin(place_lat) -
+                     dsin(my_lat) * dcos(place_lat) * dcos(delta_lon)))
     # return bearing as and integer number of degrees
     return (bearing / pi * 180) % 360
 
@@ -59,8 +67,8 @@ def get_distance(my_lat, my_lon, place):
     # http://www.ig.utexas.edu/outreach/googleearth/latlong.html
     delta_lon = place_lon - my_lon
     distance = acos(
-        sin(my_lat) * sin(place_lat) +
-        cos(my_lat) * cos(place_lat) * cos(delta_lon)
+        dsin(my_lat) * dsin(place_lat) +
+        dcos(my_lat) * dcos(place_lat) * dcos(delta_lon)
     ) * EARTH_RADIUS
     # return bearing as and integer number of degrees
     return distance
