@@ -11,16 +11,19 @@ import AVFoundation
 import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
-  
-  let defaultLat: CGFloat = 37.4431
-  let defaultLon: CGFloat = -122.1711
+
   let screenWidth = UIScreen.mainScreen().bounds.size.width
+  let screenHeight = UIScreen.mainScreen().bounds.size.height
   let locationManager: CLLocationManager = CLLocationManager()
+  var locationButton: UIButton?
 
   let captureSession = AVCaptureSession()
   var previewLayer : AVCaptureVideoPreviewLayer?
   var captureDevice : AVCaptureDevice?
   var dataHelper: DataHelper?
+  var pictureTimer: NSTimer!
+  var stillImageOutput: AVCaptureStillImageOutput = AVCaptureStillImageOutput()
+  var placeName: UIButton?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -32,6 +35,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
   
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
+    
+    // Start Registering Pictures
+    pictureTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("capturePhoto"), userInfo: nil, repeats: true)
   }
 
   override func didReceiveMemoryWarning() {
@@ -39,9 +45,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
   }
   
   func configureCustomViews() {
-    let sampleView:UIView = UIView(frame: CGRectMake(0, 0, screenWidth, 50))
-    sampleView.backgroundColor = UIColor.redColor()
-    self.view.addSubview(sampleView)
+    setupButton()
+  }
+  
+  func setupButton() {
+    placeName = UIButton(frame: CGRectMake(Views.Margin / 2, screenHeight - Views.ButtonHeight - Views.Margin, screenWidth - Views.Margin, Views.ButtonHeight))
+    placeName!.layer.cornerRadius = 0.0
+    placeName!.backgroundColor = Views.ButtonColor
+    placeName!.setTitle("Default Text", forState: .Normal)
+    self.view.addSubview(placeName!)
   }
   
   func configureLocationManager() {
@@ -70,6 +82,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
     configureDevice(device)
     var error : NSError? = nil
     captureSession.addInput(AVCaptureDeviceInput(device: captureDevice, error: &error))
+    captureSession.addOutput(self.stillImageOutput)
     if error != nil {
       println("Error: \(error?.localizedDescription)")
     }
@@ -86,6 +99,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
     device.unlockForConfiguration()
   }
   
+  func capturePhoto() {
+    self.stillImageOutput.captureStillImageAsynchronouslyFromConnection(self.stillImageOutput.connectionWithMediaType(AVMediaTypeVideo)) { (buffer:CMSampleBuffer!, error:NSError!) -> Void in
+      var image = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
+      var dataImage = UIImage(data: image)
+    }
+  }
+  
   // MARK: CLLocationManagerDelegate
   func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
     if dataHelper == nil {
@@ -96,7 +116,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
   }
   
   func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
-    // TODO: Fetch if there is a location.
+    handleCurrentBearing(newHeading)
+  }
+  
+  func handleCurrentBearing(bearing: CLHeading) {
+    if let currentPlace: JSON = dataHelper!.placeForBearing(bearing) {
+      let difference = abs(currentPlace["bearing"].doubleValue - bearing.magneticHeading)
+      println("Difference: \(difference)")
+      if difference < General.DegreeMargin {
+        let placeName: String = currentPlace["name"].string!
+        self.placeName?.setTitle(placeName, forState: UIControlState.Normal)
+        self.placeName?.hidden = false
+      } else {
+        self.placeName?.setTitle("DEFAULT", forState: UIControlState.Normal)
+        self.placeName?.hidden = false
+      }
+    }
   }
   
   // MARK: UICollectionViewDelegate
