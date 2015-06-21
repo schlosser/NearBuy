@@ -24,6 +24,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
   var pictureTimer: NSTimer!
   var stillImageOutput: AVCaptureStillImageOutput = AVCaptureStillImageOutput()
   var placeName: UIButton?
+  var leftArrow: UIImageView?
+  var rightArrow: UIImageView?
+  var dealsButton: UIButton?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,15 +48,46 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
   }
   
   func configureCustomViews() {
-    setupButton()
+    setupButtons()
+    setupArrows()
   }
   
-  func setupButton() {
-    placeName = UIButton(frame: CGRectMake(Views.Margin / 2, screenHeight - Views.ButtonHeight - Views.Margin, screenWidth - Views.Margin, Views.ButtonHeight))
+  func setupButtons() {
+    placeName = UIButton(frame: CGRectMake(Views.Margin / 2.0, screenHeight - Views.ButtonHeight - Views.Margin, screenWidth - Views.Margin, Views.ButtonHeight))
     placeName!.layer.cornerRadius = 0.0
     placeName!.backgroundColor = Views.ButtonColor
-    placeName!.setTitle("Default Text", forState: .Normal)
+    placeName!.setTitleColor(UIColor.blackColor(), forState: .Normal)
+    placeName!.titleLabel!.font = Views.ButtonFont
+    placeName!.addTarget(self, action: Selector("showPlaceDetails"), forControlEvents: UIControlEvents.TouchUpInside)
+    placeName!.hidden = true
     self.view.addSubview(placeName!)
+    
+    dealsButton = UIButton(frame: CGRectMake(Views.Margin / 2.0, Views.Margin, screenWidth - Views.Margin, Views.ButtonHeight))
+    dealsButton!.layer.cornerRadius = 0.0
+    dealsButton!.backgroundColor = Views.ButtonColor
+    dealsButton!.setTitle("Deals in your area", forState: .Normal)
+    dealsButton!.setTitleColor(UIColor.blackColor(), forState: .Normal)
+    dealsButton!.titleLabel!.font = Views.ButtonFont
+    dealsButton!.addTarget(self, action: Selector("loadDeals"), forControlEvents: UIControlEvents.TouchUpInside)
+    self.view.addSubview(dealsButton!)
+  }
+  
+  func showPlaceDetails() {
+    println("Show place!")
+  }
+  
+  func loadDeals() {
+    println("Load deals!")
+  }
+  
+  func setupArrows() {
+    leftArrow = UIImageView(frame: CGRectMake(Views.Margin / 2.0, (screenHeight / 2.0) - (Views.ArrowHeight / 2.0), Views.ArrowHeight, Views.ArrowHeight))
+    leftArrow?.image = UIImage(named: "LeftArrow")
+    view.addSubview(leftArrow!)
+    
+    rightArrow = UIImageView(frame: CGRectMake(screenWidth - (Views.Margin / 2.0) - Views.ArrowHeight, (screenHeight / 2.0) - (Views.ArrowHeight / 2.0), Views.ArrowHeight, Views.ArrowHeight))
+    rightArrow?.image = UIImage(named: "RightArrow")
+    view.addSubview(rightArrow!)
   }
   
   func configureLocationManager() {
@@ -122,14 +156,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionV
   func handleCurrentBearing(bearing: CLHeading) {
     if let currentPlace: JSON = dataHelper!.placeForBearing(bearing) {
       let difference = abs(currentPlace["bearing"].doubleValue - bearing.magneticHeading)
-      println("Difference: \(difference)")
       if difference < General.DegreeMargin {
         let placeName: String = currentPlace["name"].string!
         self.placeName?.setTitle(placeName, forState: UIControlState.Normal)
         self.placeName?.hidden = false
       } else {
-        self.placeName?.setTitle("DEFAULT", forState: UIControlState.Normal)
-        self.placeName?.hidden = false
+        self.placeName?.hidden = true
       }
     }
   }

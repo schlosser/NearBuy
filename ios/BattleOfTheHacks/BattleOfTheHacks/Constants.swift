@@ -17,6 +17,9 @@ struct Views {
   static let Margin: CGFloat = 20.0
   static let ButtonHeight: CGFloat = 50.0
   static let ButtonColor: UIColor = UIColor(white: 1.0, alpha: 0.7)
+  static let ButtonFont: UIFont = UIFont(name: "HelveticaNeue", size: 20.0)!
+  static let ButtonTextColor: UIColor = UIColor.blackColor()
+  static let ArrowHeight: CGFloat = 50.0
 }
 
 struct General {
