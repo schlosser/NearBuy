@@ -1,7 +1,6 @@
 import requests
 import json
 from config.secrets import FOURSQUARE_CLIENT_ID, FOURSQUARE_CLIENT_SECRET
-foursquareVenueIdList = []
 
 def find_foursquare_url(lat, lon, name):
 	"""
@@ -11,7 +10,6 @@ def find_foursquare_url(lat, lon, name):
 	try:
 		SEARCH_API_URL = 'https://api.foursquare.com/v2/venues/search'
 		VENUE_API_URL = 'https://api.foursquare.com/v2/venues/'
-		EXPLORE_API_URL = 'https://api.foursquare.com/v2/venues/explore'
 
 		params = {
 	        'client_id': FOURSQUARE_CLIENT_ID,
@@ -37,9 +35,6 @@ def find_foursquare_url(lat, lon, name):
 
 		venueId = result[0]['id']
 
-		if venueId is not None:
-			foursquareVenueIdList.append(venueId)
-
 		# No results found
 		if len(result) == 0:
 			print "[FOURSQUARE] no results found,"
@@ -51,44 +46,11 @@ def find_foursquare_url(lat, lon, name):
 	        'v': '20141016'
 	    }
 		venueResponse = requests.get(VENUE_API_URL+venueId, params=venueParams).json()['response']['venue']
-
-
 		shortUrl = venueResponse['shortUrl']
-		specials = venueResponse['specials']
-		rating = venueResponse.get('rating')
-
-		# Find better alternatives
-
-		exploreParams = {
-	        'client_id': FOURSQUARE_CLIENT_ID,
-	        'client_secret' : FOURSQUARE_CLIENT_SECRET,
-	        'll': '{lat},{lon}'.format(lat=lat, lon=lon),
-	        'radius': '900',
-	        'v': '20141016',
-	        'limit': '5',
-	        'intent': 'nextVenues',
-	        'lastVenue': venueId,
-	        'section' : 'food'
-	    }
-		exploreResponse = requests.get(EXPLORE_API_URL, params=exploreParams).json()['response']['groups'][0]['items']
-
-		alternatives = []
-		for item in exploreResponse:
-			if(item['venue']['url'] == None):
-				continue	
-			alternatives.append({
-				"name": item['venue'].get('name'),
-	        	"specials": item['venue']['specials'],
-	        	"url" : item['venue'].get("url"),
-	        	"rating" : item['venue'].get('rating')})
 
 		return {
-			"name": venueResponse.get('name'),
 	        "4sqUrl": shortUrl,
 	        "url": venueResponse.get('url'),
-	        "specials": specials,
-	        "rating" : rating,
-	        "explore": alternatives,
 	        "venueId": venueId
 	    }
 	except:

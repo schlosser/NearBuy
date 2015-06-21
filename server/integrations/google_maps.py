@@ -2,14 +2,14 @@ from utils.json_response import json_success, json_error_message
 from config.secrets import GOOGLE_API_KEY
 from integrations.open_table import find_open_table_url
 from math import sin, cos, atan2, pi, ceil, acos
-from integrations.foursquare import find_foursquare_url, foursquareVenueIdList
+from integrations.foursquare import find_foursquare_url
 from integrations.links import find_active_links
 import requests
 
 WIKIPEDIA_BASE = 'https://wikipedia.org/wiki/Special:Search/'
 NUM_DEGREES = 360
 API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-SEARCH_RADIUS = 4000  # meters
+SEARCH_RADIUS = 1000  # meters
 EARTH_RADIUS = 6378100  # meters
 TYPES = '|'.join([
     'bakery',
@@ -39,9 +39,6 @@ def get_resource(lat, lon, place):
         'opening_hours': place.get('opening_hours'),
         'bearing': get_bearing(lat, lon, place),
         'distance': get_distance(lat, lon, place),
-        #'open_table_url': find_open_table_url(place),
-        #'foursquare_url': find_foursquare_url(lat, lon, place['name']),
-        #'wikipedia_url': WIKIPEDIA_BASE + place['name'],
         'links': find_active_links(place['geometry']['location']['lat'], place['geometry']['location']['lng'], place, place['name'])
     }
 
