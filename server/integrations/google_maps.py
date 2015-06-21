@@ -9,7 +9,7 @@ import requests
 WIKIPEDIA_BASE = 'https://wikipedia.org/wiki/Special:Search/'
 NUM_DEGREES = 360
 API_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-SEARCH_RADIUS = 100  # meters
+SEARCH_RADIUS = 4000  # meters
 EARTH_RADIUS = 6378100  # meters
 TYPES = '|'.join([
     'bakery',
