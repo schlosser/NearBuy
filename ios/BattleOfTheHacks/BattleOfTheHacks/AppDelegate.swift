@@ -3,8 +3,6 @@
 //  BattleOfTheHacks
 //
 //  Created by Matt on 6/20/15.
-//  Copyright (c) 2015 Matthew Piccolella. All rights reserved.
-//
 
 import UIKit
 
@@ -15,7 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    // Override point for customization after application launch.
+    self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    self.window?.rootViewController = ViewController()
+    self.window?.makeKeyAndVisible()
+
     return true
   }
 
