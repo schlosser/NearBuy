@@ -11,7 +11,8 @@ TYPES = '|'.join([
     'food',
     'grocery_or_supermarket',
     'meal_delivery',
-    'meal_takeaway'
+    'meal_takeaway',
+    'movie_theater'
 ])
 
 
