@@ -105,7 +105,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   
   func showPlaceDetails() {
     currentMode = TableMode.Options
-    dataHelper?.numberOfItems(self.locationManager.heading)
+    dataHelper?.loadLinksForBearing(self.locationManager.heading)
     addModal()
   }
   
@@ -241,7 +241,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     if currentMode == TableMode.Deals {
       return 4
     } else if currentMode == TableMode.Options {
-      return 4
+      return dataHelper!.numberOfItems()
     } else {
       return 0
     }
@@ -253,8 +253,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("CellIdentifier", forIndexPath: indexPath) as! UITableViewCell
-    cell.textLabel!.text = "Matt"
-    cell.imageView!.image = UIImage(named: "Foursquare")
+    formatCell(cell, indexPath: indexPath)
     return cell
+  }
+  
+  func formatCell(cell: UITableViewCell, indexPath: NSIndexPath) {
+    if currentMode == TableMode.Options {
+      dataHelper?.formatCellAtIndex(cell, index: indexPath)
+    } else if currentMode == TableMode.Deals {
+      cell.textLabel!.text = "HEY THERE"
+    }
   }
 }

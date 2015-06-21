@@ -17,12 +17,15 @@ class DataHelper {
   let distanceCutoff: Double = 50.0
   var hasLoaded: Bool
   var error: Bool
+  var links: Array<(String,String)>
+  var currentPlace: NSString?
   
   init(location: CLLocation, completion: (() -> Void)? = nil) {
     self.lastLocationLoaded = location
     self.data = JSON([])
     self.hasLoaded = false
     self.error = false
+    self.links = []
     loadData(location, completion: completion)
   }
   
@@ -52,11 +55,40 @@ class DataHelper {
     }
   }
   
-  func numberOfItems(bearing: CLHeading) -> Int {
-    let place: JSON = placeForBearing(bearing)!
-    println("\(place)")
-    println(place["links"])
-    return 1
+  func numberOfItems() -> Int {
+    return links.count
+  }
+  
+  func loadLinksForBearing(bearing: CLHeading) {
+    self.currentPlace = keyForBearing(bearing)
+    let place: JSON = placeForKey(self.currentPlace! as String)!
+    println("Place: \(place)")
+    for (index, object) in place["links"] {
+      if index == "foursquare" {
+        let foursquareLink: String = place["links"][index]["foursquareUrl"].stringValue
+        links.append((index,foursquareLink))
+      } else {
+        let name = object.stringValue
+        links.append((index,name))
+      }
+    }
+  }
+  
+  func formatCellAtIndex(cell: UITableViewCell, index: NSIndexPath) {
+    let link = self.links[(index.row)]
+    if link.0 == "wikipediaUrl" {
+      cell.textLabel!.text = "Research on Wikipedia"
+      cell.imageView!.image = UIImage(named: "Wikipedia")
+    } else if link.0 == "foursquare" {
+      cell.textLabel!.text = "Read Reviews on Foursquare"
+      cell.imageView!.image = UIImage(named: "Foursquare")
+    } else {
+      cell.textLabel!.text = "Something went wrong"
+    }
+  }
+  
+  func keyForBearing(bearing: CLHeading) -> NSString? {
+    return data["data"]["map"][Int(bearing.magneticHeading)].string!
   }
   
   func placeForBearing(bearing: CLHeading) -> JSON? {
