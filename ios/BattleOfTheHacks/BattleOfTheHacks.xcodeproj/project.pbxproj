@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		454FD14494FC999825104244 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226E8D9950E57D2602682347 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5C1B0BD21B3630F20098A92D /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1B0BD11B3630F20098A92D /* ViewUtils.swift */; };
+		5C1B0BD41B363F9C0098A92D /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1B0BD31B363F9C0098A92D /* DataHelper.swift */; };
 		5CB112281B35FEA00094D766 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB112271B35FEA00094D766 /* AppDelegate.swift */; };
 		5CB1122A1B35FEA00094D766 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB112291B35FEA00094D766 /* ViewController.swift */; };
 		5CB1122F1B35FEA00094D766 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CB1122E1B35FEA00094D766 /* Images.xcassets */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		226E8D9950E57D2602682347 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C1B0BD11B3630F20098A92D /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
+		5C1B0BD31B363F9C0098A92D /* DataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
 		5CB112221B35FEA00094D766 /* BattleOfTheHacks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BattleOfTheHacks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB112261B35FEA00094D766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CB112271B35FEA00094D766 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		5CB112241B35FEA00094D766 /* BattleOfTheHacks */ = {
 			isa = PBXGroup;
 			children = (
+				5C1B0BD31B363F9C0098A92D /* DataHelper.swift */,
 				5CB112271B35FEA00094D766 /* AppDelegate.swift */,
 				5CB112291B35FEA00094D766 /* ViewController.swift */,
 				5CB1122E1B35FEA00094D766 /* Images.xcassets */,
@@ -288,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CB1122A1B35FEA00094D766 /* ViewController.swift in Sources */,
+				5C1B0BD41B363F9C0098A92D /* DataHelper.swift in Sources */,
 				5CB112281B35FEA00094D766 /* AppDelegate.swift in Sources */,
 				5C1B0BD21B3630F20098A92D /* ViewUtils.swift in Sources */,
 			);

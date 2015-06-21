@@ -10,7 +10,7 @@ import SwiftyJSON
 import AVFoundation
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
   
   let defaultLat: CGFloat = 37.4431
   let defaultLon: CGFloat = -122.1711
@@ -20,6 +20,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   let captureSession = AVCaptureSession()
   var previewLayer : AVCaptureVideoPreviewLayer?
   var captureDevice : AVCaptureDevice?
+  var dataHelper: DataHelper?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -38,7 +39,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   }
   
   func configureCustomViews() {
-    // Add custom subviews
     let sampleView:UIView = UIView(frame: CGRectMake(0, 0, screenWidth, 50))
     sampleView.backgroundColor = UIColor.redColor()
     self.view.addSubview(sampleView)
@@ -51,6 +51,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     locationManager.startUpdatingHeading()
   }
   
+  // MARK: AVFoundation
   func obtainDeviceAndBegin() {
     let devices = AVCaptureDevice.devices()
     for device in devices {
@@ -84,21 +85,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     device.focusMode = .Locked
     device.unlockForConfiguration()
   }
-
-  func makePlacesCall(lat: CGFloat, lon: CGFloat) {
-    Alamofire.request(Method.GET, "http://b14s.schlosser.io/places", parameters: ["lat": lat, "lon": lon])
-      .responseJSON { (request, response, data, error) in
-        let responseData = JSON(data!)
-        println(responseData["data"]["lat"])
-    }
-  }
   
   // MARK: CLLocationManagerDelegate
   func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
-    println("\(newLocation)")
+    if dataHelper == nil {
+      dataHelper = DataHelper(location: newLocation)
+    } else {
+      dataHelper?.updateData(newLocation)
+    }
   }
   
   func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
-    //println("\(newHeading.magneticHeading)")
+    // TODO: Fetch if there is a location.
+  }
+  
+  // MARK: UICollectionViewDelegate
+  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    // TODO: We need to select things.
+  }
+  
+  // MARK: UICollectionViewDataSource
+  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    let cell = UICollectionViewCell()
+    return cell
+  }
+  
+  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return self.dataHelper!.numberOfItems()
   }
 }
