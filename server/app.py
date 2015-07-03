@@ -2,7 +2,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import (Flask, request, render_template, flash, redirect,
                    url_for)
 from flask.ext.mongoengine import MongoEngine
-from flask.ext.login import LoginManager, login_required, login_user, logout_user
+from flask.ext.login import (LoginManager, login_required, login_user,
+                             logout_user)
 from integrations.google_maps import nearby_places
 from utils.json_response import json_success, json_error_message
 from config.secrets import SECRET_KEY
@@ -61,17 +62,17 @@ def deals():
 def login():
     from models.user import User
     form = LoginForm()
-    if form.validate_on_submit():
-        try:
+    try:
+        if form.validate_on_submit():
             user = User.objects.get(email=form.email.data)
+            print user.__dict__
             if not check_password_hash(user.password_hash, form.password.data):
                 raise
             login_user(user)
             flash('Welcome, %s.' % user.first_name)
-        except:
-            form.errors['email'] = ['Bad email / password combination']
-
-        return redirect(url_for('admin'))
+            return redirect(url_for('admin'))
+    except:
+        form.errors['email'] = ['Bad email / password combination']
 
     return render_template('login.html', form=form)
 
@@ -135,6 +136,12 @@ def _generate_random_offer_code():
 def load_user(userid):
     from models.user import User
     return User.objects.get(id=ObjectId(userid))
+
+
+@login_manager.unauthorized_handler
+def unathorized():
+    flash('You must be logged in to see this page')
+    return redirect(url_for('login'))
 
 
 if __name__ == '__main__':
